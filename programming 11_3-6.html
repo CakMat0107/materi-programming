@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="id" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modul Terpadu Python: Variabel, Data Types, & Logic Pengondisian (IF/ELSE)</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        darkBg: '#090d16',
+                        cardBg: '#111827',
+                        accentBlue: '#3b82f6',
+                        accentCyan: '#06b6d4',
+                        accentGreen: '#10b981',
+                        accentYellow: '#f59e0b',
+                        accentPurple: '#8b5cf6',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .glow-emerald { box-shadow: 0 0 30px -5px rgba(16, 185, 129, 0.25); }
+        .gradient-text {
+            background: linear-gradient(135deg, #38bdf8 0%, #10b981 50%, #f59e0b 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        @keyframes pulse-slow {
+            0%, 100% { opacity: 0.25; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.05); }
+        }
+        .animate-pulse-slow {
+            animation: pulse-slow 7s infinite ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-darkBg text-gray-200 font-sans antialiased min-h-screen selection:bg-emerald-500 selection:text-white relative overflow-x-hidden">
+
+    <!-- Ambient Background Lights -->
+    <div class="fixed top-0 left-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none animate-pulse-slow"></div>
+    <div class="fixed top-1/3 right-10 w-96 h-96 bg-emerald-600/10 rounded-full blur-3xl pointer-events-none animate-pulse-slow" style="animation-delay: 2s;"></div>
+    <div class="fixed bottom-10 left-10 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl pointer-events-none animate-pulse-slow" style="animation-delay: 4s;"></div>
+
+    <!-- Header Navigation -->
+    <header class="border-b border-gray-800/80 bg-cardBg/80 backdrop-blur-md sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <a href="silabus.html" class="p-2 bg-emerald-500/10 border border-emerald-500/30 rounded-xl text-emerald-400 hover:bg-emerald-500/20 transition-all">
+                    <i data-lucide="arrow-left" class="w-5 h-5"></i>
+                </a>
+                <div>
+                    <span class="text-xs font-semibold text-emerald-400 uppercase tracking-wider">Kelas 11 • Semester 1</span>
+                    <h1 class="text-base sm:text-lg font-bold text-white">Pertemuan 03 - 06: Modul Terpadu Pemrograman Python</h1>
+                </div>
+            </div>
+            <div class="hidden sm:flex items-center gap-2 text-xs bg-gray-900/90 border border-gray-800 px-3 py-1.5 rounded-lg">
+                <i data-lucide="clock" class="w-4 h-4 text-emerald-400"></i>
+                <span>10 x 45 Menit (4 Pertemuan)</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-10 space-y-16">
+
+        <!-- HERO SECTION -->
+        <section class="relative bg-cardBg border border-emerald-500/30 rounded-3xl p-6 sm:p-10 glow-emerald overflow-hidden" data-aos="fade-up">
+            <div class="grid md:grid-cols-12 gap-8 items-center">
+                <div class="md:col-span-7 space-y-4">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold">
+                        <i data-lucide="book-open" class="w-3.5 h-3.5"></i> Modul Praktikum Terpadu Lengkap
+                    </div>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white leading-tight">
+                        Menguasai Fondasi Pemrograman <br><span class="gradient-text">Python & Algoritma Logika</span>
+                    </h2>
+                    <p class="text-gray-400 text-sm sm:text-base leading-relaxed">
+                        Pelajari cara menyimpan data di memori (Variabel & Tipe Data), mengolah masukan/keluaran (Input/Output), serta membuat keputusan logis dengan percabangan (<code>if-elif-else</code>) secara interaktif.
+                    </p>
+                    <div class="pt-2 flex flex-wrap gap-3">
+                        <a href="#materi" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-xs transition-all flex items-center gap-2">
+                            <i data-lucide="code-2" class="w-4 h-4"></i> Pelajari Konsep Dasar
+                        </a>
+                        <a href="#projects" class="px-4 py-2 bg-gray-800 hover:bg-gray-700 border border-gray-700 text-gray-300 rounded-xl text-xs font-semibold transition-all flex items-center gap-2">
+                            <i data-lucide="terminal" class="w-4 h-4"></i> Interactive Simulator
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Visual Badge -->
+                <div class="md:col-span-5 flex justify-center relative">
+                    <div class="w-64 h-64 sm:w-72 sm:h-72 rounded-2xl bg-gradient-to-tr from-emerald-900/30 via-gray-900 to-blue-900/30 border border-emerald-500/30 flex items-center justify-center p-6 relative group">
+                        <div class="absolute inset-0 bg-emerald-500/10 rounded-2xl blur-xl group-hover:bg-emerald-500/20 transition-all"></div>
+                        <div class="relative z-10 flex flex-col items-center text-center space-y-3">
+                            <div class="flex gap-2">
+                                <span class="px-2.5 py-1 bg-blue-950 border border-blue-800 text-blue-400 font-mono text-xs rounded-lg">str</span>
+                                <span class="px-2.5 py-1 bg-emerald-950 border border-emerald-800 text-emerald-400 font-mono text-xs rounded-lg">int</span>
+                                <span class="px-2.5 py-1 bg-purple-950 border border-purple-800 text-purple-400 font-mono text-xs rounded-lg">bool</span>
+                            </div>
+                            <div class="p-4 bg-darkBg/90 border border-emerald-400/40 rounded-xl shadow-lg">
+                                <i data-lucide="file-code-2" class="w-12 h-12 text-emerald-400"></i>
+                            </div>
+                            <span class="text-xs font-mono text-emerald-300 bg-emerald-950/80 px-3 py-1 rounded-full border border-emerald-800">
+                                main_python.py
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RINGKASAN KONSEP DASAR MATERI -->
+        <section id="materi" class="space-y-6" data-aos="fade-up">
+            <div class="flex items-center gap-3">
+                <div class="p-2 bg-blue-500/10 rounded-lg text-blue-400 border border-blue-500/20">
+                    <i data-lucide="layers" class="w-5 h-5"></i>
+                </div>
+                <h3 class="text-xl font-bold text-white">Ringkasan Konsep Kunci (Pertemuan 03 - 06)</h3>
+            </div>
+
+            <!-- Tabel Tipe Data -->
+            <div class="bg-cardBg border border-gray-800 rounded-2xl p-6 overflow-x-auto">
+                <h4 class="text-sm font-bold text-white mb-4 flex items-center gap-2">
+                    <i data-lucide="database" class="w-4 h-4 text-blue-400"></i> 1. Tipe Data Dasar & Variabel
+                </h4>
+                <table class="w-full text-left border-collapse min-w-[550px]">
+                    <thead>
+                        <tr class="border-b border-gray-800 text-xs font-semibold text-gray-400 uppercase">
+                            <th class="py-3 px-4">Tipe Data</th>
+                            <th class="py-3 px-4">Kode Python</th>
+                            <th class="py-3 px-4">Contoh Nilai</th>
+                            <th class="py-3 px-4">Penjelasan Singkat</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-800/60 text-xs sm:text-sm">
+                        <tr>
+                            <td class="py-3.5 px-4 font-bold text-yellow-400">String (Teks)</td>
+                            <td class="py-3.5 px-4 font-mono text-gray-300">str</td>
+                            <td class="py-3.5 px-4 font-mono text-yellow-300">"Ahmad", 'Kelas 11'</td>
+                            <td class="py-3.5 px-4 text-gray-400">Diapit oleh tanda petik ganda <code class="text-white">""</code> atau tunggal <code class="text-white">''</code>.</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3.5 px-4 font-bold text-blue-400">Integer (Angka Bulat)</td>
+                            <td class="py-3.5 px-4 font-mono text-gray-300">int</td>
+                            <td class="py-3.5 px-4 font-mono text-blue-300">16, -5, 2026</td>
+                            <td class="py-3.5 px-4 text-gray-400">Angka bulat tanpa desimal. Bisa bernilai positif/negatif.</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3.5 px-4 font-bold text-emerald-400">Float (Desimal)</td>
+                            <td class="py-3.5 px-4 font-mono text-gray-300">float</td>
+                            <td class="py-3.5 px-4 font-mono text-emerald-300">170.5, 85.0</td>
+                            <td class="py-3.5 px-4 text-gray-400">Angka berkoma (menggunakan tanda titik <code class="text-white">.</code> sebagai pemisah).</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3.5 px-4 font-bold text-purple-400">Boolean (Logika)</td>
+                            <td class="py-3.5 px-4 font-mono text-gray-300">bool</td>
+                            <td class="py-3.5 px-4 font-mono text-purple-300">True, False</td>
+                            <td class="py-3.5 px-4 text-gray-400">Hanya bernilai Benar (<code class="text-white">True</code>) atau Salah (<code class="text-white">False</code>).</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Grid Input/Output & Percabangan -->
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Type Conversion & Input/Output -->
+                <div class="bg-cardBg border border-gray-800 p-6 rounded-2xl space-y-3 hover:border-emerald-500/40 transition-all">
+                    <div class="p-2 bg-emerald-500/10 w-fit rounded-lg text-emerald-400">
+                        <i data-lucide="arrow-right-left" class="w-5 h-5"></i>
+                    </div>
+                    <h4 class="text-base font-bold text-white">2. Input/Output & Type Casting</h4>
+                    <p class="text-xs text-gray-400 leading-relaxed">
+                        Fungsi <code class="text-emerald-400">input()</code> selalu menghasilkan <code class="text-blue-400">str</code>. Gunakan konversi (*casting*) untuk kalkulasi matematika dan **f-string** untuk mencetak hasil.
+                    </p>
+                    <pre class="bg-gray-950 p-3 rounded-lg text-xs font-mono text-gray-300 border border-gray-800"><code>umur = <span class="text-emerald-400">int</span>(<span class="text-blue-400">input</span>(<span class="text-amber-300">"Umur: "</span>))
+<span class="text-emerald-400">print</span>(<span class="text-amber-300">f"Umur Anda {umur} tahun"</span>)</code></pre>
+                </div>
+
+                <!-- Logika IF / ELSE -->
+                <div class="bg-cardBg border border-gray-800 p-6 rounded-2xl space-y-3 hover:border-purple-500/40 transition-all">
+                    <div class="p-2 bg-purple-500/10 w-fit rounded-lg text-purple-400">
+                        <i data-lucide="git-fork" class="w-5 h-5"></i>
+                    </div>
+                    <h4 class="text-base font-bold text-white">3. Percabangan (IF - ELIF - ELSE)</h4>
+                    <p class="text-xs text-gray-400 leading-relaxed">
+                        Evaluasi kondisi menggunakan operator pembanding (<code>&gt;, &lt;, ==, &gt;=</code>) dan operator logika (<code>and, or, not</code>) untuk mengontrol alur program.
+                    </p>
+                    <pre class="bg-gray-950 p-3 rounded-lg text-xs font-mono text-gray-300 border border-gray-800"><code><span class="text-purple-400">if</span> umur &gt;= <span class="text-amber-300">15</span>:
+    <span class="text-emerald-400">print</span>(<span class="text-amber-300">"Mukallaf"</span>)
+<span class="text-purple-400">else</span>:
+    <span class="text-emerald-400">print</span>(<span class="text-amber-300">"Belum Mukallaf"</span>)</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- INTERACTIVE PROJECTS & SIMULATORS -->
+        <section id="projects" class="space-y-8" data-aos="fade-up">
+            <div class="flex items-center justify-between border-b border-gray-800 pb-4">
+                <div class="flex items-center gap-3">
+                    <div class="p-2 bg-emerald-500/10 rounded-lg text-emerald-400 border border-emerald-500/20">
+                        <i data-lucide="terminal" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-white">Studi Kasus & Live Terminal Simulator</h3>
+                        <p class="text-xs text-gray-400">Uji coba simulasi program praktikum secara interaktif di browser kamu!</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB SYSTEM MENU -->
+            <div class="flex flex-wrap gap-2 border-b border-gray-800 pb-3" id="tabButtons">
+                <button onclick="switchTab('tab-profil')" id="btn-tab-profil" class="px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 bg-emerald-600 text-white shadow-lg">
+                    <i data-lucide="user-check" class="w-4 h-4"></i> 1. Profil & Tabungan
+                </button>
+                <button onclick="switchTab('tab-zakat')" id="btn-tab-zakat" class="px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 bg-gray-900 border border-gray-800 text-gray-400 hover:text-white">
+                    <i data-lucide="calculator" class="w-4 h-4"></i> 2. Kalkulator Zakat
+                </button>
+                <button onclick="switchTab('tab-baligh')" id="btn-tab-baligh" class="px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 bg-gray-900 border border-gray-800 text-gray-400 hover:text-white">
+                    <i data-lucide="shield-check" class="w-4 h-4"></i> 3. Cek Baligh/Mukallaf
+                </button>
+            </div>
+
+            <!-- TAB CONTENT 1: PROFIL & KALKULATOR TABUNGAN -->
+            <div id="tab-profil" class="tab-content space-y-6">
+                <div class="grid md:grid-cols-12 gap-6 items-stretch">
+                    <!-- Code Snippet -->
+                    <div class="md:col-span-6 bg-cardBg border border-gray-800 rounded-2xl overflow-hidden flex flex-col">
+                        <div class="bg-gray-900 px-4 py-2.5 border-b border-gray-800 flex items-center justify-between">
+                            <span class="text-xs font-mono text-yellow-400">profil_siswa.py</span>
+                            <button onclick="copyToClipboard('code-profil')" class="text-xs text-gray-400 hover:text-white flex items-center gap-1 bg-gray-800 px-2 py-1 rounded border border-gray-700">
+                                <i data-lucide="copy" class="w-3 h-3"></i> Copy
+                            </button>
+                        </div>
+                        <pre class="p-4 text-xs font-mono text-gray-300 leading-relaxed overflow-x-auto flex-1 bg-gray-950"><code id="code-profil">nama = <span class="text-emerald-400">input</span>(<span class="text-amber-300">"Masukkan Nama: "</span>)
+tahun_lahir = <span class="text-purple-400">int</span>(<span class="text-emerald-400">input</span>(<span class="text-amber-300">"Tahun Lahir: "</span>))
+uang_saku = <span class="text-purple-400">int</span>(<span class="text-emerald-400">input</span>(<span class="text-amber-300">"Uang Saku/Hari: "</span>))
+
+umur = <span class="text-cyan-400">2026</span> - tahun_lahir
+uang_bulanan = uang_saku * <span class="text-cyan-400">30</span>
+
+<span class="text-emerald-400">print</span>(<span class="text-amber-300">f"Halo {nama}, Umur: {umur} th"</span>)
+<span class="text-emerald-400">print</span>(<span class="text-amber-300">f"Uang Saku/Bulan: Rp{uang_bulanan:,}"</span>)</code></pre>
+                    </div>
+
+                    <!-- Simulator Form & Terminal -->
+                    <div class="md:col-span-6 bg-cardBg border border-gray-800 rounded-2xl p-5 flex flex-col justify-between space-y-4">
+                        <h4 class="text-sm font-bold text-white flex items-center gap-2">
+                            <i data-lucide="play" class="w-4 h-4 text-emerald-400"></i> Simulator Profil
+                        </h4>
+                        <div class="space-y-3 text-xs">
+                            <div>
+                                <label class="block text-gray-400 mb-1">Nama Lengkap (str)</label>
+                                <input type="text" id="simNama" value="Ahmad Santri" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-white focus:border-emerald-500 focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-gray-400 mb-1">Tahun Lahir (int)</label>
+                                <input type="number" id="simTahun" value="2009" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-white focus:border-emerald-500 focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-gray-400 mb-1">Uang Saku Harian Rp (int)</label>
+                                <input type="number" id="simUang" value="15000" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-white focus:border-emerald-500 focus:outline-none">
+                            </div>
+                        </div>
+                        <button onclick="runProfilSim()" class="w-full py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-xs transition-all">
+                            Jalankan Program (python profil_siswa.py)
+                        </button>
+                        <div class="bg-black/80 border border-gray-800 rounded-xl p-3 font-mono text-xs text-emerald-400 space-y-1 min-h-[100px]" id="profilTerminal"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB CONTENT 2: KALKULATOR ZAKAT -->
+            <div id="tab-zakat" class="tab-content hidden space-y-6">
+                <div class="grid md:grid-cols-12 gap-6 items-stretch">
+                    <!-- Code Snippet -->
+                    <div class="md:col-span-6 bg-cardBg border border-gray-800 rounded-2xl overflow-hidden flex flex-col">
+                        <div class="bg-gray-900 px-4 py-2.5 border-b border-gray-800 flex items-center justify-between">
+                            <span class="text-xs font-mono text-amber-400">kalkulator_zakat.py</span>
+                            <button onclick="copyToClipboard('code-zakat')" class="text-xs text-gray-400 hover:text-white flex items-center gap-1 bg-gray-800 px-2 py-1 rounded border border-gray-700">
+                                <i data-lucide="copy" class="w-3 h-3"></i> Copy
+                            </button>
+                        </div>
+                        <pre class="p-4 text-xs font-mono text-gray-300 leading-relaxed overflow-x-auto flex-1 bg-gray-950"><code id="code-zakat">NISAB_EMAS = <span class="text-purple-400">85.0</span>
+total_emas = <span class="text-emerald-400">float</span>(<span class="text-blue-400">input</span>(<span class="text-amber-300">"Total Emas (g): "</span>))
+
+<span class="text-purple-400">if</span> total_emas &gt;= NISAB_EMAS:
+    zakat = total_emas * <span class="text-purple-400">0.025</span>
+    <span class="text-emerald-400">print</span>(<span class="text-amber-300">f"Wajib Zakat: {zakat:.2f} gram"</span>)
+<span class="text-purple-400">else</span>:
+    sisa = NISAB_EMAS - total_emas
+    <span class="text-emerald-400">print</span>(<span class="text-amber-300">f"Belum Wajib Zakat. Kurang {sisa:.1f} g"</span>)</code></pre>
+                    </div>
+
+                    <!-- Simulator Form & Terminal -->
+                    <div class="md:col-span-6 bg-cardBg border border-gray-800 rounded-2xl p-5 flex flex-col justify-between space-y-4">
+                        <h4 class="text-sm font-bold text-white flex items-center gap-2">
+                            <i data-lucide="play" class="w-4 h-4 text-amber-400"></i> Simulator Zakat Maal
+                        </h4>
+                        <div class="space-y-3 text-xs">
+                            <div class="p-2.5 bg-amber-500/10 border border-amber-500/20 rounded-xl text-amber-300">
+                                <b>Nisab Emas:</b> 85 Gram Emas (Haul 1 Tahun).
+                            </div>
+                            <div>
+                                <label class="block text-gray-400 mb-1">Kepemilikan Emas (float - gram)</label>
+                                <input type="number" id="zakatEmas" value="92.5" step="0.1" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-white focus:border-amber-500 focus:outline-none">
+                            </div>
+                        </div>
+                        <button onclick="runZakatSim()" class="w-full py-2 bg-amber-600 hover:bg-amber-500 text-white font-bold rounded-xl text-xs transition-all">
+                            Hitung Zakat (python kalkulator_zakat.py)
+                        </button>
+                        <div class="bg-black/80 border border-gray-800 rounded-xl p-3 font-mono text-xs text-amber-400 space-y-1 min-h-[100px]" id="zakatTerminal"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB CONTENT 3: CEK BALIGH / MUKALLAF -->
+            <div id="tab-baligh" class="tab-content hidden space-y-6">
+                <div class="grid md:grid-cols-12 gap-6 items-stretch">
+                    <!-- Code Snippet -->
+                    <div class="md:col-span-6 bg-cardBg border border-gray-800 rounded-2xl overflow-hidden flex flex-col">
+                        <div class="bg-gray-900 px-4 py-2.5 border-b border-gray-800 flex items-center justify-between">
+                            <span class="text-xs font-mono text-purple-400">cek_mukallaf.py</span>
+                            <button onclick="copyToClipboard('code-baligh')" class="text-xs text-gray-400 hover:text-white flex items-center gap-1 bg-gray-800 px-2 py-1 rounded border border-gray-700">
+                                <i data-lucide="copy" class="w-3 h-3"></i> Copy
+                            </button>
+                        </div>
+                        <pre class="p-4 text-xs font-mono text-gray-300 leading-relaxed overflow-x-auto flex-1 bg-gray-950"><code id="code-baligh">umur = <span class="text-emerald-400">int</span>(<span class="text-blue-400">input</span>(<span class="text-amber-300">"Umur: "</span>))
+tanda = <span class="text-blue-400">input</span>(<span class="text-amber-300">"Tanda Biologis? (y/t): "</span>) == <span class="text-amber-300">'y'</span>
+
+<span class="text-purple-400">if</span> umur &gt;= <span class="text-purple-400">15</span> <span class="text-purple-400">or</span> tanda:
+    <span class="text-emerald-400">print</span>(<span class="text-amber-300">"Status: MUKALLAF"</span>)
+<span class="text-purple-400">else</span>:
+    <span class="text-emerald-400">print</span>(<span class="text-amber-300">"Status: BELUM MUKALLAF"</span>)</code></pre>
+                    </div>
+
+                    <!-- Simulator Form & Terminal -->
+                    <div class="md:col-span-6 bg-cardBg border border-gray-800 rounded-2xl p-5 flex flex-col justify-between space-y-4">
+                        <h4 class="text-sm font-bold text-white flex items-center gap-2">
+                            <i data-lucide="play" class="w-4 h-4 text-purple-400"></i> Simulator Mukallaf
+                        </h4>
+                        <div class="space-y-3 text-xs">
+                            <div>
+                                <label class="block text-gray-400 mb-1">Umur (Tahun)</label>
+                                <input type="number" id="balighUmur" value="14" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-white focus:border-purple-500 focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-gray-400 mb-1">Tanda Biologis (Mimpi Basah/Haid)</label>
+                                <select id="balighTanda" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-white focus:border-purple-500 focus:outline-none">
+                                    <option value="y">Sudah Mengalami (y)</option>
+                                    <option value="t" selected>Belum Mengalami (t)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button onclick="runBalighSim()" class="w-full py-2 bg-purple-600 hover:bg-purple-500 text-white font-bold rounded-xl text-xs transition-all">
+                            Cek Status (python cek_mukallaf.py)
+                        </button>
+                        <div class="bg-black/80 border border-gray-800 rounded-xl p-3 font-mono text-xs text-purple-300 space-y-1 min-h-[100px]" id="balighTerminal"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- HANDS-ON CHALLENGE & SOLUSI -->
+        <section id="tantangan" class="space-y-6" data-aos="fade-up">
+            <div class="flex items-center justify-between flex-wrap gap-3">
+                <div class="flex items-center gap-3">
+                    <div class="p-2 bg-emerald-500/10 rounded-lg text-emerald-400 border border-emerald-500/20">
+                        <i data-lucide="award" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-white">Hands-on Challenge & Solusi</h3>
+                        <p class="text-xs text-gray-400">Kerjakan tantangan di VS Code, lalu buka kunci jawabannya!</p>
+                    </div>
+                </div>
+
+                <button onclick="toggleSectionCode('sec-challenge-code', 'challenge-icon', 'challenge-text')" class="px-4 py-2 bg-emerald-600/20 hover:bg-emerald-600/30 border border-emerald-500/40 text-emerald-300 rounded-xl text-xs font-semibold transition-all flex items-center gap-2">
+                    <i id="challenge-icon" data-lucide="code" class="w-4 h-4"></i>
+                    <span id="challenge-text">Lihat Kunci Jawaban Code</span>
+                </button>
+            </div>
+
+            <div class="bg-cardBg border border-gray-800 p-6 rounded-3xl space-y-6">
+                <div class="p-4 bg-gray-900/80 border border-emerald-500/30 rounded-2xl space-y-2">
+                    <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider">Misi Koding Praktikum:</span>
+                    <h4 class="text-base font-bold text-white">"Kalkulator Belanja Toko Santri"</h4>
+                    <p class="text-xs text-gray-300 leading-relaxed">
+                        Buatlah berkas bernama <code class="text-yellow-400">tugas_kasir.py</code>. Minta pengguna memasukkan **Nama Barang**, **Harga Satuan (Rp)**, dan **Jumlah Barang**. Hitung total bayar dan tampilkan struk belanja menggunakan **f-string**!
+                    </p>
+                </div>
+
+                <!-- COLLAPSIBLE CODE VIEWER -->
+                <div id="sec-challenge-code" class="hidden border-t border-gray-800 pt-6 transition-all duration-500">
+                    <div class="bg-gray-950 border border-gray-800 rounded-2xl overflow-hidden shadow-2xl">
+                        <div class="bg-gray-900 px-4 py-3 border-b border-gray-800 flex items-center justify-between">
+                            <span class="text-xs font-mono text-emerald-400">tugas_kasir.py</span>
+                            <button onclick="copyToClipboard('code-task-kasir')" class="text-xs text-gray-400 hover:text-white flex items-center gap-1 bg-gray-800 px-2.5 py-1 rounded-lg border border-gray-700">
+                                <i data-lucide="copy" class="w-3.5 h-3.5"></i> Copy Code
+                            </button>
+                        </div>
+                        <pre class="p-5 overflow-x-auto text-xs sm:text-sm font-mono text-gray-300 leading-relaxed"><code id="code-task-kasir"><span class="text-emerald-400">print</span>(<span class="text-amber-300">"=== TOKO SANTRI COMPUTER SCIENCE ==="</span>)
+
+<span class="text-gray-500"># 1. Input Data Belanja</span>
+nama_barang = <span class="text-emerald-400">input</span>(<span class="text-amber-300">"Nama Barang       : "</span>)
+harga_satuan = <span class="text-purple-400">int</span>(<span class="text-emerald-400">input</span>(<span class="text-amber-300">"Harga Satuan (Rp) : "</span>))
+jumlah_beli = <span class="text-purple-400">int</span>(<span class="text-emerald-400">input</span>(<span class="text-amber-300">"Jumlah Dibeli     : "</span>))
+
+<span class="text-gray-500"># 2. Hitung Total Pembelian</span>
+total_bayar = harga_satuan * jumlah_beli
+
+<span class="text-gray-500"># 3. Tampilkan Struk Pembayaran</span>
+<span class="text-emerald-400">print</span>(<span class="text-amber-300">"\n===================================="</span>)
+<span class="text-emerald-400">print</span>(<span class="text-amber-300">"          STRUK PEMBAYARAN          "</span>)
+<span class="text-emerald-400">print</span>(<span class="text-amber-300">"===================================="</span>)
+<span class="text-emerald-400">print</span>(<span class="text-amber-300">f"Item       : {nama_barang}"</span>)
+<span class="text-emerald-400">print</span>(<span class="text-amber-300">f"Harga @    : Rp {harga_satuan:,}"</span>)
+<span class="text-emerald-400">print</span>(<span class="text-amber-300">f"Kuantitas  : {jumlah_beli} pcs"</span>)
+<span class="text-emerald-400">print</span>(<span class="text-amber-300">"------------------------------------"</span>)
+<span class="text-emerald-400">print</span>(<span class="text-amber-300">f"TOTAL BAYAR: Rp {total_bayar:,}"</span>)
+<span class="text-emerald-400">print</span>(<span class="text-amber-300">"===================================="</span>)</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TROUBLESHOOTING & ERROR COMMON -->
+        <section class="space-y-6" data-aos="fade-up">
+            <div class="flex items-center gap-3">
+                <div class="p-2 bg-red-500/10 rounded-lg text-red-400 border border-red-500/20">
+                    <i data-lucide="alert-triangle" class="w-5 h-5"></i>
+                </div>
+                <h3 class="text-xl font-bold text-white">Troubleshooting Error yang Sering Terjadi</h3>
+            </div>
+
+            <div class="bg-cardBg border border-gray-800 rounded-2xl p-6 overflow-x-auto">
+                <table class="w-full text-left border-collapse min-w-[550px]">
+                    <thead>
+                        <tr class="border-b border-gray-800 text-xs font-semibold text-gray-400 uppercase">
+                            <th class="py-3 px-4">Jenis Error</th>
+                            <th class="py-3 px-4">Penyebab Utama</th>
+                            <th class="py-3 px-4">Solusi Cepat</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-800/60 text-xs sm:text-sm">
+                        <tr>
+                            <td class="py-3.5 px-4 font-mono text-red-400">TypeError: unsupported operand...</td>
+                            <td class="py-3.5 px-4 text-gray-400">Operasi matematika antara <code class="text-blue-400">str</code> dan <code class="text-emerald-400">int/float</code>.</td>
+                            <td class="py-3.5 px-4 text-gray-300">Bungkus <code class="text-blue-400">input()</code> dengan <code class="text-emerald-400">int()</code> atau <code class="text-purple-400">float()</code>.</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3.5 px-4 font-mono text-amber-400">IndentationError: expected an indented block</td>
+                            <td class="py-3.5 px-4 text-gray-400">Lupa memberikan spasi/tab di bawah blok <code class="text-purple-400">if</code> / <code class="text-purple-400">else</code>.</td>
+                            <td class="py-3.5 px-4 text-gray-300">Tekan <kbd class="px-1.5 py-0.5 bg-gray-800 border border-gray-700 rounded text-[10px]">Tab</kbd> (4 spasi) di bawah baris kondisi.</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3.5 px-4 font-mono text-cyan-400">SyntaxError: invalid syntax</td>
+                            <td class="py-3.5 px-4 text-gray-400">Lupa menulis titik dua <code class="text-white">:</code> di akhir kondisi <code class="text-purple-400">if</code>.</td>
+                            <td class="py-3.5 px-4 text-gray-300">Pastikan baris kondisi diakhiri titik dua, contoh: <code class="text-emerald-400">if umur &gt;= 15:</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-800/80 bg-cardBg/60 py-8 text-center text-xs text-gray-500">
+        <div class="max-w-6xl mx-auto px-4 space-y-2">
+            <p>© 2026 Curriculum CS • MA Plus Sunan Giri</p>
+            <p class="text-gray-600">Modul Terpadu Pertemuan 02-06: Variabel, Tipe Data, I/O, & Logic IF/ELSE.</p>
+        </div>
+    </footer>
+
+    <!-- Interactive JS Scripts -->
+    <script>
+        AOS.init({ duration: 700, once: true });
+        lucide.createIcons();
+
+        // TAB SWITCHER FUNCTION
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById(tabId).classList.remove('hidden');
+
+            const btnProfil = document.getElementById('btn-tab-profil');
+            const btnZakat = document.getElementById('btn-tab-zakat');
+            const btnBaligh = document.getElementById('btn-tab-baligh');
+
+            [btnProfil, btnZakat, btnBaligh].forEach(btn => {
+                btn.className = "px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 bg-gray-900 border border-gray-800 text-gray-400 hover:text-white";
+            });
+
+            if (tabId === 'tab-profil') {
+                btnProfil.className = "px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 bg-emerald-600 text-white shadow-lg";
+            } else if (tabId === 'tab-zakat') {
+                btnZakat.className = "px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 bg-amber-600 text-white shadow-lg";
+            } else if (tabId === 'tab-baligh') {
+                btnBaligh.className = "px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 bg-purple-600 text-white shadow-lg";
+            }
+        }
+
+        // SIMULATOR 1: PROFIL & TABUNGAN
+        function runProfilSim() {
+            const nama = document.getElementById('simNama').value || "Siswa CS";
+            const tahun = parseInt(document.getElementById('simTahun').value) || 2009;
+            const uang = parseInt(document.getElementById('simUang').value) || 0;
+
+            const umur = 2026 - tahun;
+            const uangBulanan = uang * 30;
+
+            document.getElementById('profilTerminal').innerHTML = `
+                <div class="text-gray-500">$ python profil_siswa.py</div>
+                <div class="text-yellow-400 font-bold">--- PROFIL SISWA ---</div>
+                <div>Halo! Nama saya <span class="text-white font-bold">${nama}</span>.</div>
+                <div>Umur saya: <span class="text-blue-400 font-bold">${umur}</span> tahun.</div>
+                <div>Estimasi saku sebulan: <span class="text-emerald-400 font-bold">Rp ${uangBulanan.toLocaleString('id-ID')}</span></div>
+            `;
+        }
+
+        // SIMULATOR 2: ZAKAT
+        function runZakatSim() {
+            const emas = parseFloat(document.getElementById('zakatEmas').value) || 0;
+            const nisab = 85.0;
+            const terminal = document.getElementById('zakatTerminal');
+
+            if (emas >= nisab) {
+                const zakat = (emas * 0.025).toFixed(2);
+                terminal.innerHTML = `
+                    <div class="text-gray-500">$ python kalkulator_zakat.py</div>
+                    <div class="text-emerald-400 font-bold">✓ Wajib Menunaikan Zakat!</div>
+                    <div>Total Emas : ${emas} gram (&ge; Nisab 85g)</div>
+                    <div>Besar Zakat (2.5%) : ${zakat} gram emas</div>
+                `;
+            } else {
+                const sisa = (nisab - emas).toFixed(1);
+                terminal.innerHTML = `
+                    <div class="text-gray-500">$ python kalkulator_zakat.py</div>
+                    <div class="text-amber-400 font-bold">✕ Belum Wajib Zakat</div>
+                    <div>Total Emas : ${emas} gram (&lt; Nisab 85g)</div>
+                    <div class="text-gray-400">Kurang nisab: ${sisa} gram lagi</div>
+                `;
+            }
+        }
+
+        // SIMULATOR 3: BALIGH / MUKALLAF
+        function runBalighSim() {
+            const umur = parseInt(document.getElementById('balighUmur').value) || 0;
+            const tanda = document.getElementById('balighTanda').value === 'y';
+            const terminal = document.getElementById('balighTerminal');
+
+            if (umur >= 15 || tanda) {
+                terminal.innerHTML = `
+                    <div class="text-gray-500">$ python cek_mukallaf.py</div>
+                    <div class="text-emerald-400 font-bold">Status: MUKALLAF (Wajib Syariat)</div>
+                    <div class="text-gray-400">Kriteria terpenuhi.</div>
+                `;
+            } else {
+                terminal.innerHTML = `
+                    <div class="text-gray-500">$ python cek_mukallaf.py</div>
+                    <div class="text-yellow-400 font-bold">Status: BELUM MUKALLAF (Sabi)</div>
+                    <div class="text-gray-400">Umur ${umur} th (&lt; 15 th) & belum ada tanda biologis.</div>
+                `;
+            }
+        }
+
+        // TOGGLE COLLAPSIBLE CODE
+        function toggleSectionCode(wrapperId, iconId, textId) {
+            const wrapper = document.getElementById(wrapperId);
+            const icon = document.getElementById(iconId);
+            const text = document.getElementById(textId);
+
+            if (wrapper.classList.contains('hidden')) {
+                wrapper.classList.remove('hidden');
+                text.innerText = "Sembunyikan Code";
+                icon.setAttribute('data-lucide', 'code-2');
+            } else {
+                wrapper.classList.add('hidden');
+                text.innerText = "Lihat Kunci Jawaban Code";
+                icon.setAttribute('data-lucide', 'code');
+            }
+            lucide.createIcons();
+        }
+
+        // COPY TO CLIPBOARD
+        function copyToClipboard(elementId) {
+            const codeText = document.getElementById(elementId).innerText;
+            navigator.clipboard.writeText(codeText).then(() => {
+                alert("Kode berhasil disalin ke clipboard!");
+            });
+        }
+
+        // Run default simulation on load
+        window.onload = function() {
+            runProfilSim();
+            runZakatSim();
+            runBalighSim();
+        };
+    </script>
+</body>
+</html>

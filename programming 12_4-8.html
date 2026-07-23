@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="id" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pertemuan 04-08 - Slicing Figma ke HTML, Tailwind CSS & JS DOM</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        darkBg: '#090d16',
+                        cardBg: '#111827',
+                        accentBlue: '#3b82f6',
+                        accentCyan: '#06b6d4',
+                        accentGreen: '#10b981',
+                        accentYellow: '#f59e0b',
+                        accentRed: '#ef4444',
+                        accentPurple: '#8b5cf6',
+                        accentTailwind: '#38bdf8',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .glow-tailwind { box-shadow: 0 0 35px -5px rgba(56, 189, 248, 0.25); }
+        .glow-purple { box-shadow: 0 0 35px -5px rgba(139, 92, 246, 0.25); }
+        .gradient-tailwind {
+            background: linear-gradient(135deg, #38bdf8 0%, #8b5cf6 50%, #10b981 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        @keyframes pulse-slow {
+            0%, 100% { opacity: 0.25; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(1.05); }
+        }
+        .animate-pulse-slow {
+            animation: pulse-slow 8s infinite ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-darkBg text-gray-200 font-sans antialiased min-h-screen selection:bg-sky-500 selection:text-white relative overflow-x-hidden">
+
+    <!-- Ambient Background Lights -->
+    <div class="fixed top-0 left-1/4 w-96 h-96 bg-sky-600/10 rounded-full blur-3xl pointer-events-none animate-pulse-slow"></div>
+    <div class="fixed top-1/3 right-10 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl pointer-events-none animate-pulse-slow" style="animation-delay: 2.5s;"></div>
+    <div class="fixed bottom-10 left-10 w-96 h-96 bg-emerald-600/10 rounded-full blur-3xl pointer-events-none animate-pulse-slow" style="animation-delay: 5s;"></div>
+
+    <!-- Header Navigation -->
+    <header class="border-b border-gray-800/80 bg-cardBg/80 backdrop-blur-md sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <a href="#" class="p-2 bg-sky-500/10 border border-sky-500/30 rounded-xl text-sky-400 hover:bg-sky-500/20 transition-all">
+                    <i data-lucide="arrow-left" class="w-5 h-5"></i>
+                </a>
+                <div>
+                    <span class="text-xs font-semibold text-sky-400 uppercase tracking-wider">Kelas 12 • Semester 1</span>
+                    <h1 class="text-base sm:text-lg font-bold text-white">Pertemuan 04 - 08: Tailwind CSS & JS DOM</h1>
+                </div>
+            </div>
+            <div class="hidden sm:flex items-center gap-2 text-xs bg-gray-900/90 border border-gray-800 px-3 py-1.5 rounded-lg">
+                <i data-lucide="code-2" class="w-4 h-4 text-sky-400"></i>
+                <span>Figma ➔ Code Slicing</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 py-10 space-y-16">
+
+        <!-- HERO SECTION -->
+        <section class="relative bg-cardBg border border-sky-500/30 rounded-3xl p-6 sm:p-10 glow-tailwind overflow-hidden" data-aos="fade-up">
+            <div class="grid md:grid-cols-12 gap-8 items-center">
+                <div class="md:col-span-7 space-y-4">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-500/10 border border-sky-500/30 text-sky-400 text-xs font-semibold">
+                        <i data-lucide="layers" class="w-3.5 h-3.5"></i> Frontend Web Development
+                    </div>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white leading-tight">
+                        Slicing Figma ke Kode <br><span class="gradient-tailwind">HTML, Tailwind & JS DOM</span>
+                    </h2>
+                    <p class="text-gray-400 text-sm sm:text-base leading-relaxed">
+                        Ubah rancangan UI/UX dari Figma menjadi aplikasi web nyata! Pelajari pemetaan komponen Figma ke kelas utilitas <b>Tailwind CSS</b>, struktur semantik <b>HTML5</b>, dan interaktivitas dinamis berbasis <b>JavaScript DOM</b>.
+                    </p>
+                    
+                    <div class="pt-2 flex flex-wrap gap-3 text-xs font-mono text-gray-300">
+                        <span class="px-3 py-1.5 rounded-lg bg-gray-950 border border-gray-800 flex items-center gap-1.5"><i data-lucide="wand-2" class="w-3.5 h-3.5 text-sky-400"></i> Utility-First CSS</span>
+                        <span class="px-3 py-1.5 rounded-lg bg-gray-950 border border-gray-800 flex items-center gap-1.5"><i data-lucide="mouse-pointer-click" class="w-3.5 h-3.5 text-purple-400"></i> Event Listener</span>
+                        <span class="px-3 py-1.5 rounded-lg bg-gray-950 border border-gray-800 flex items-center gap-1.5"><i data-lucide="cpu" class="w-3.5 h-3.5 text-emerald-400"></i> Dynamic State</span>
+                    </div>
+                </div>
+
+                <!-- Code Slicing Preview Card -->
+                <div class="md:col-span-5 flex justify-center relative">
+                    <div class="w-full bg-gray-950 border border-gray-800 rounded-2xl p-4 font-mono text-xs text-gray-300 space-y-3 shadow-2xl relative overflow-hidden">
+                        <div class="flex items-center justify-between border-b border-gray-800 pb-2 text-gray-400">
+                            <span class="flex items-center gap-1.5 text-sky-400 font-bold"><i data-lucide="file-code" class="w-4 h-4"></i> CardComponent.html</span>
+                            <span class="text-[10px] bg-sky-950/80 text-sky-300 px-2 py-0.5 rounded border border-sky-800">Tailwind v3</span>
+                        </div>
+                        <div class="space-y-1.5 text-[11px] leading-relaxed">
+                            <p class="text-gray-500">&lt;!-- Auto Layout ➔ Flexbox --&gt;</p>
+                            <p class="text-purple-400">&lt;<span class="text-pink-400">div</span> <span class="text-sky-300">class</span>=<span class="text-emerald-300">"flex flex-col gap-4 p-6 bg-gray-900 rounded-2xl border border-gray-800"</span>&gt;</p>
+                            <p class="pl-4 text-purple-400">&lt;<span class="text-pink-400">h3</span> <span class="text-sky-300">class</span>=<span class="text-emerald-300">"text-lg font-bold text-white"</span>&gt;</p>
+                            <p class="pl-8 text-gray-200">Judul Card</p>
+                            <p class="pl-4 text-purple-400">&lt;/<span class="text-pink-400">h3</span>&gt;</p>
+                            <p class="pl-4 text-purple-400">&lt;<span class="text-pink-400">button</span> <span class="text-sky-300">id</span>=<span class="text-emerald-300">"btnClick"</span> <span class="text-sky-300">class</span>=<span class="text-emerald-300">"bg-sky-500 hover:bg-sky-400 font-bold py-2 px-4 rounded-xl"</span>&gt;</p>
+                            <p class="pl-8 text-gray-200">Klik Saya</p>
+                            <p class="pl-4 text-purple-400">&lt;/<span class="text-pink-400">button</span>&gt;</p>
+                            <p class="text-purple-400">&lt;/<span class="text-pink-400">div</span>&gt;</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TOOL 1: FIGMA TO TAILWIND SPACING & COLOR CONVERTER -->
+        <section class="space-y-6" data-aos="fade-up">
+            <div class="flex items-center gap-3 border-b border-gray-800 pb-4">
+                <div class="p-2 bg-sky-500/10 rounded-lg text-sky-400 border border-sky-500/20">
+                    <i data-lucide="calculator" class="w-5 h-5"></i>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white">Kamus Konversi Figma ➔ Tailwind CSS</h3>
+                    <p class="text-xs text-gray-400">Panduan cepat menerjemahkan properti desain Figma ke kelas utilitas Tailwind.</p>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Auto Layout Conversion -->
+                <div class="bg-cardBg border border-gray-800 rounded-2xl p-5 space-y-3">
+                    <div class="flex items-center gap-2 text-sky-400 font-bold text-sm">
+                        <i data-lucide="layout-grid" class="w-4 h-4"></i> Auto Layout (Figma)
+                    </div>
+                    <div class="space-y-2 text-xs font-mono">
+                        <div class="p-2 bg-gray-950 rounded-lg border border-gray-800 flex justify-between">
+                            <span class="text-gray-400">Direction: Vertical</span>
+                            <span class="text-sky-300 font-bold">flex flex-col</span>
+                        </div>
+                        <div class="p-2 bg-gray-950 rounded-lg border border-gray-800 flex justify-between">
+                            <span class="text-gray-400">Direction: Horizontal</span>
+                            <span class="text-sky-300 font-bold">flex flex-row</span>
+                        </div>
+                        <div class="p-2 bg-gray-950 rounded-lg border border-gray-800 flex justify-between">
+                            <span class="text-gray-400">Gap: 16px</span>
+                            <span class="text-sky-300 font-bold">gap-4</span>
+                        </div>
+                        <div class="p-2 bg-gray-950 rounded-lg border border-gray-800 flex justify-between">
+                            <span class="text-gray-400">Alignment: Center</span>
+                            <span class="text-sky-300 font-bold">items-center</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Spacing & Padding Conversion -->
+                <div class="bg-cardBg border border-gray-800 rounded-2xl p-5 space-y-3">
+                    <div class="flex items-center gap-2 text-purple-400 font-bold text-sm">
+                        <i data-lucide="ruler" class="w-4 h-4"></i> Spacing / Padding
+                    </div>
+                    <div class="space-y-2 text-xs font-mono">
+                        <div class="p-2 bg-gray-950 rounded-lg border border-gray-800 flex justify-between">
+                            <span class="text-gray-400">Padding: 8px</span>
+                            <span class="text-purple-300 font-bold">p-2</span>
+                        </div>
+                        <div class="p-2 bg-gray-950 rounded-lg border border-gray-800 flex justify-between">
+                            <span class="text-gray-400">Padding: 16px</span>
+                            <span class="text-purple-300 font-bold">p-4</span>
+                        </div>
+                        <div class="p-2 bg-gray-950 rounded-lg border border-gray-800 flex justify-between">
+                            <span class="text-gray-400">Padding: 24px</span>
+                            <span class="text-purple-300 font-bold">p-6</span>
+                        </div>
+                        <div class="p-2 bg-gray-950 rounded-lg border border-gray-800 flex justify-between">
+                            <span class="text-gray-400">Padding: 32px</span>
+                            <span class="text-purple-300 font-bold">p-8</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Radius & Shadow -->
+                <div class="bg-cardBg border border-gray-800 rounded-2xl p-5 space-y-3">
+                    <div class="flex items-center gap-2 text-emerald-400 font-bold text-sm">
+                        <i data-lucide="square-dashed-bottom-code" class="w-4 h-4"></i> Corner Radius & Effect
+                    </div>
+                    <div class="space-y-2 text-xs font-mono">
+                        <div class="p-2 bg-gray-950 rounded-lg border border-gray-800 flex justify-between">
+                            <span class="text-gray-400">Corner Radius: 8px</span>
+                            <span class="text-emerald-300 font-bold">rounded-lg</span>
+                        </div>
+                        <div class="p-2 bg-gray-950 rounded-lg border border-gray-800 flex justify-between">
+                            <span class="text-gray-400">Corner Radius: 16px</span>
+                            <span class="text-emerald-300 font-bold">rounded-2xl</span>
+                        </div>
+                        <div class="p-2 bg-gray-950 rounded-lg border border-gray-800 flex justify-between">
+                            <span class="text-gray-400">Drop Shadow</span>
+                            <span class="text-emerald-300 font-bold">shadow-lg / shadow-2xl</span>
+                        </div>
+                        <div class="p-2 bg-gray-950 rounded-lg border border-gray-800 flex justify-between">
+                            <span class="text-gray-400">Stroke / Border</span>
+                            <span class="text-emerald-300 font-bold">border border-gray-800</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- INTERACTIVE JAVASCRIPT DOM PLAYGROUND -->
+        <section class="space-y-6" data-aos="fade-up">
+            <div class="flex items-center justify-between border-b border-gray-800 pb-4">
+                <div class="flex items-center gap-3">
+                    <div class="p-2 bg-purple-500/10 rounded-lg text-purple-400 border border-purple-500/20">
+                        <i data-lucide="play" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-white">Interactive JS DOM Playground</h3>
+                        <p class="text-xs text-gray-400">Uji coba interaktivitas elemen UI secara langsung dengan memanipulasi DOM melalui event listener.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-12 gap-8 items-stretch">
+                <!-- Sandbox Controls -->
+                <div class="md:col-span-6 bg-cardBg border border-gray-800 rounded-2xl p-6 space-y-5 flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <h4 class="text-sm font-bold text-white flex items-center gap-2">
+                            <i data-lucide="sliders" class="w-4 h-4 text-sky-400"></i> Kontrol Manipulasi DOM
+                        </h4>
+
+                        <!-- Input Text Manipulator -->
+                        <div class="space-y-1.5">
+                            <label class="text-xs text-gray-400 font-semibold">1. Ubah Teks Header Card (textContent)</label>
+                            <input type="text" id="inputCardTitle" value="Kartu Produk Digital" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-xs text-white focus:border-sky-500 focus:outline-none" oninput="updateCardTitle()">
+                        </div>
+
+                        <!-- Toggle State Badge -->
+                        <div class="space-y-1.5">
+                            <label class="text-xs text-gray-400 font-semibold">2. Ubah Status Badge (classList.toggle)</label>
+                            <div class="flex gap-2">
+                                <button onclick="setStatus('Tersedia', 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30')" class="px-3 py-1.5 bg-emerald-950 border border-emerald-800 text-emerald-400 rounded-lg text-xs font-semibold hover:bg-emerald-900 transition-all">
+                                    Tersedia
+                                </button>
+                                <button onclick="setStatus('Habis', 'bg-red-500/20 text-red-400 border-red-500/30')" class="px-3 py-1.5 bg-red-950 border border-red-800 text-red-400 rounded-lg text-xs font-semibold hover:bg-red-900 transition-all">
+                                    Habis Stok
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Counter State -->
+                        <div class="space-y-1.5">
+                            <label class="text-xs text-gray-400 font-semibold">3. Hitung Jumlah Like (State Counter)</label>
+                            <div class="flex items-center gap-3">
+                                <button onclick="changeLike(1)" class="p-2 bg-sky-600 hover:bg-sky-500 text-white rounded-xl text-xs font-bold transition-all flex items-center gap-1">
+                                    <i data-lucide="thumbs-up" class="w-3.5 h-3.5"></i> Tambah Like
+                                </button>
+                                <button onclick="changeLike(-1)" class="p-2 bg-gray-800 hover:bg-gray-700 text-gray-300 rounded-xl text-xs transition-all">
+                                    Kurangi
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Code Snippet Reference -->
+                    <div class="p-3 bg-gray-950 border border-gray-800 rounded-xl font-mono text-[11px] text-gray-400 space-y-1">
+                        <div class="text-purple-400 font-bold">// Kode JS DOM yang dieksekusi:</div>
+                        <p><span class="text-sky-300">document</span>.querySelector(<span class="text-emerald-300">'#title'</span>).textContent = ...;</p>
+                        <p><span class="text-sky-300">badge</span>.className = ...;</p>
+                    </div>
+                </div>
+
+                <!-- Real-Time Rendered Component -->
+                <div class="md:col-span-6 bg-gray-950 border border-gray-800 rounded-2xl p-6 flex flex-col justify-center items-center relative overflow-hidden">
+                    <span class="absolute top-3 left-4 text-[10px] font-mono text-gray-500 uppercase tracking-wider">Live DOM Preview</span>
+
+                    <!-- Target Card Component -->
+                    <div id="targetCard" class="w-full max-w-sm bg-cardBg border border-gray-800 rounded-2xl p-5 space-y-4 shadow-xl hover:border-sky-500/30 transition-all">
+                        <div class="flex justify-between items-start">
+                            <span id="targetBadge" class="px-2.5 py-1 rounded-full text-[10px] font-bold border bg-emerald-500/20 text-emerald-400 border-emerald-500/30 transition-all">
+                                Tersedia
+                            </span>
+                            <div class="flex items-center gap-1 text-xs text-pink-400 font-bold">
+                                <i data-lucide="heart" class="w-4 h-4 fill-pink-500/20"></i>
+                                <span id="likeCounter">12</span>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4 id="targetTitle" class="text-base font-bold text-white transition-all">Kartu Produk Digital</h4>
+                            <p class="text-xs text-gray-400 mt-1">Komponen UI yang dislicing dari Figma menggunakan Tailwind CSS.</p>
+                        </div>
+
+                        <div class="pt-2 border-t border-gray-800 flex justify-between items-center text-xs">
+                            <span class="font-bold text-white">Rp 150.000</span>
+                            <button onclick="changeLike(1)" class="px-3 py-1.5 bg-sky-500 hover:bg-sky-400 text-gray-950 font-bold rounded-lg transition-all text-xs">
+                                Beli Sekarang
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- STEP-BY-STEP WORKFLOW PRAKTIKUM -->
+        <section class="space-y-6" data-aos="fade-up">
+            <div class="flex items-center gap-3 border-b border-gray-800 pb-4">
+                <div class="p-2 bg-emerald-500/10 rounded-lg text-emerald-400 border border-emerald-500/20">
+                    <i data-lucide="list-ordered" class="w-5 h-5"></i>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white">Alur Kerja Slicing Proyek (Pertemuan 04 - 08)</h3>
+                    <p class="text-xs text-gray-400">Tahapan bertahap memindahkan desain dari Figma hingga menjadi web interaktif utuh.</p>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-4 gap-4">
+                <!-- Step 1 -->
+                <div class="bg-cardBg border border-gray-800 rounded-2xl p-4 space-y-2 hover:border-sky-500/40 transition-all">
+                    <div class="text-xs font-mono font-bold text-sky-400">01. INSPECT FIGMA</div>
+                    <h4 class="text-sm font-bold text-white">Analisis Layout</h4>
+                    <p class="text-xs text-gray-400 leading-relaxed">
+                        Cek ukuran padding, margin, warna (HEX), dan hirarki Auto Layout pada file Figma.
+                    </p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="bg-cardBg border border-gray-800 rounded-2xl p-4 space-y-2 hover:border-purple-500/40 transition-all">
+                    <div class="text-xs font-mono font-bold text-purple-400">02. HTML STRUCTURE</div>
+                    <h4 class="text-sm font-bold text-white">Markup Semantik</h4>
+                    <p class="text-xs text-gray-400 leading-relaxed">
+                        Buat struktur tag HTML5 yang rapi (<code>&lt;header&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;button&gt;</code>).
+                    </p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="bg-cardBg border border-gray-800 rounded-2xl p-4 space-y-2 hover:border-emerald-500/40 transition-all">
+                    <div class="text-xs font-mono font-bold text-emerald-400">03. TAILWIND STYLING</div>
+                    <h4 class="text-sm font-bold text-white">Styling Utilities</h4>
+                    <p class="text-xs text-gray-400 leading-relaxed">
+                        Terapkan kelas Tailwind CSS untuk flexbox, grid, typography, warna, dan responsivitas.
+                    </p>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="bg-cardBg border border-gray-800 rounded-2xl p-4 space-y-2 hover:border-pink-500/40 transition-all">
+                    <div class="text-xs font-mono font-bold text-pink-400">04. JS DOM LOGIC</div>
+                    <h4 class="text-sm font-bold text-white">Interaktivitas</h4>
+                    <p class="text-xs text-gray-400 leading-relaxed">
+                        Hubungkan event listener (click/input) untuk mengubah elemen DOM secara dinamis.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CHECKLIST TUGAS SLICING -->
+        <section class="bg-cardBg border border-gray-800 rounded-2xl p-6 space-y-4" data-aos="fade-up">
+            <div class="flex items-center justify-between border-b border-gray-800 pb-3">
+                <div class="flex items-center gap-3">
+                    <div class="p-2 bg-sky-500/10 rounded-lg text-sky-400 border border-sky-500/20">
+                        <i data-lucide="check-square" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-base font-bold text-white">Checklist Slicing & DOM JS</h3>
+                        <p class="text-xs text-gray-400">Pastikan kriteria berikut terpenuhi pada tugas web milikmu.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid sm:grid-cols-2 gap-3 text-xs">
+                <label class="flex items-center gap-3 p-3 bg-gray-950 border border-gray-800 rounded-xl cursor-pointer hover:border-gray-700 transition-all">
+                    <input type="checkbox" class="w-4 h-4 accent-sky-500 rounded">
+                    <span class="text-gray-300">Layout persis seperti Figma (Presisi Spacing & Alignment)</span>
+                </label>
+                <label class="flex items-center gap-3 p-3 bg-gray-950 border border-gray-800 rounded-xl cursor-pointer hover:border-gray-700 transition-all">
+                    <input type="checkbox" class="w-4 h-4 accent-sky-500 rounded">
+                    <span class="text-gray-300">Responsif di layar HP dan Desktop (menggunakan breakpoint Tailwind)</span>
+                </label>
+                <label class="flex items-center gap-3 p-3 bg-gray-950 border border-gray-800 rounded-xl cursor-pointer hover:border-gray-700 transition-all">
+                    <input type="checkbox" class="w-4 h-4 accent-sky-500 rounded">
+                    <span class="text-gray-300">Minimal 2 Fitur JS DOM (misal: Modal, Filter, atau Counter)</span>
+                </label>
+                <label class="flex items-center gap-3 p-3 bg-gray-950 border border-gray-800 rounded-xl cursor-pointer hover:border-gray-700 transition-all">
+                    <input type="checkbox" class="w-4 h-4 accent-sky-500 rounded">
+                    <span class="text-gray-300">Kode HTML & JS bersih tanpa error di Developer Console</span>
+                </label>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-800/80 bg-cardBg/60 py-8 text-center text-xs text-gray-500">
+        <div class="max-w-6xl mx-auto px-4 space-y-2">
+            <p>© 2026 Curriculum CS • MA Plus Sunan Giri</p>
+            <p class="text-gray-600">Modul Pertemuan 04 - 08: Slicing Figma ke HTML + Tailwind CSS & JavaScript DOM.</p>
+        </div>
+    </footer>
+
+    <!-- Interactive Script -->
+    <script>
+        AOS.init({ duration: 700, once: true });
+        lucide.createIcons();
+
+        let currentLikes = 12;
+
+        function updateCardTitle() {
+            const val = document.getElementById('inputCardTitle').value;
+            const targetTitle = document.getElementById('targetTitle');
+            targetTitle.textContent = val || 'Judul Kartu';
+        }
+
+        function setStatus(text, classes) {
+            const badge = document.getElementById('targetBadge');
+            badge.textContent = text;
+            badge.className = `px-2.5 py-1 rounded-full text-[10px] font-bold border transition-all ${classes}`;
+        }
+
+        function changeLike(amount) {
+            currentLikes = Math.max(0, currentLikes + amount);
+            document.getElementById('likeCounter').textContent = currentLikes;
+        }
+    </script>
+</body>
+</html>

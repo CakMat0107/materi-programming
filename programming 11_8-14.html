@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="id" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pertemuan 08 - 14: Master Class Python & Database (Ultra Edition)</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        darkBg: '#090d16',
+                        cardBg: '#111827',
+                        accentBlue: '#3b82f6',
+                        accentCyan: '#06b6d4',
+                        accentGreen: '#10b981',
+                        accentYellow: '#f59e0b',
+                        accentRed: '#ef4444',
+                        accentPurple: '#8b5cf6',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .glow-cyan { box-shadow: 0 0 30px -5px rgba(6, 182, 212, 0.25); }
+        .glow-purple { box-shadow: 0 0 30px -5px rgba(139, 92, 246, 0.25); }
+        .gradient-text {
+            background: linear-gradient(135deg, #06b6d4 0%, #10b981 50%, #8b5cf6 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        @keyframes pulse-slow {
+            0%, 100% { opacity: 0.2; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(1.05); }
+        }
+        .animate-pulse-slow {
+            animation: pulse-slow 8s infinite ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-darkBg text-gray-200 font-sans antialiased min-h-screen selection:bg-cyan-500 selection:text-white relative overflow-x-hidden">
+
+    <!-- Ambient Background Lights -->
+    <div class="fixed top-0 left-1/4 w-96 h-96 bg-cyan-600/10 rounded-full blur-3xl pointer-events-none animate-pulse-slow"></div>
+    <div class="fixed top-1/2 right-10 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl pointer-events-none animate-pulse-slow" style="animation-delay: 2s;"></div>
+    <div class="fixed bottom-10 left-10 w-96 h-96 bg-emerald-600/10 rounded-full blur-3xl pointer-events-none animate-pulse-slow" style="animation-delay: 4s;"></div>
+
+    <!-- Header Navigation -->
+    <header class="border-b border-gray-800/80 bg-cardBg/80 backdrop-blur-md sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <a href="silabus.html" class="p-2 bg-cyan-500/10 border border-cyan-500/30 rounded-xl text-cyan-400 hover:bg-cyan-500/20 transition-all">
+                    <i data-lucide="arrow-left" class="w-5 h-5"></i>
+                </a>
+                <div>
+                    <span class="text-xs font-semibold text-cyan-400 uppercase tracking-wider">Kelas 11 • Computer Science</span>
+                    <h1 class="text-base sm:text-lg font-bold text-white">Pertemuan 08 - 14: Core Python & SQLite Database</h1>
+                </div>
+            </div>
+            <div class="hidden sm:flex items-center gap-2 text-xs bg-gray-900/90 border border-gray-800 px-3 py-1.5 rounded-lg">
+                <i data-lucide="terminal" class="w-4 h-4 text-emerald-400"></i>
+                <span>Hybrid Learning Lab</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 py-10 space-y-16">
+
+        <!-- HERO SECTION -->
+        <section class="relative bg-cardBg border border-cyan-500/30 rounded-3xl p-6 sm:p-10 glow-cyan overflow-hidden" data-aos="fade-up">
+            <div class="grid md:grid-cols-12 gap-8 items-center">
+                <div class="md:col-span-8 space-y-4">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs font-semibold">
+                        <i data-lucide="layers" class="w-3.5 h-3.5"></i> Modul Terintegrasi Per-Sesi & Proyek
+                    </div>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white leading-tight">
+                        Menguasai Struktur Data, <br><span class="gradient-text">Fungsi Modular & Database SQLite</span>
+                    </h2>
+                    <p class="text-gray-400 text-sm sm:text-base leading-relaxed">
+                        Pelajari konsep dasar per-minggu melalui *Interactive Code Playground*, atau langsung uji coba *Project Studio* (Kasir Digital & Database CRUD Santri).
+                    </p>
+                    
+                    <div class="pt-2 flex flex-wrap gap-2 text-xs font-mono">
+                        <span class="bg-gray-900 border border-gray-800 px-3 py-1.5 rounded-lg text-cyan-300"># For_While_Loops</span>
+                        <span class="bg-gray-900 border border-gray-800 px-3 py-1.5 rounded-lg text-blue-300"># List_and_Dict</span>
+                        <span class="bg-gray-900 border border-gray-800 px-3 py-1.5 rounded-lg text-purple-300"># Modular_Def</span>
+                        <span class="bg-gray-900 border border-gray-800 px-3 py-1.5 rounded-lg text-amber-300"># SQLite3_CRUD</span>
+                    </div>
+                </div>
+
+                <div class="md:col-span-4 flex justify-center">
+                    <div class="w-full bg-gray-950 border border-gray-800 rounded-2xl p-4 font-mono text-xs text-gray-300 space-y-2 shadow-2xl">
+                        <div class="flex items-center justify-between border-b border-gray-800 pb-2 text-gray-500">
+                            <span>main_system.py</span>
+                            <span class="text-emerald-400">● SQLite Active</span>
+                        </div>
+                        <div class="text-purple-400">import <span class="text-white">sqlite3</span></div>
+                        <div class="text-blue-400">def <span class="text-yellow-300">tambah_santri</span>(nis, nama):</div>
+                        <div class="pl-4 text-gray-400">conn = sqlite3.connect(<span class="text-emerald-300">'app.db'</span>)</div>
+                        <div class="pl-4 text-gray-400">cursor = conn.cursor()</div>
+                        <div class="pl-4 text-gray-400">cursor.execute(<span class="text-emerald-300">"INSERT..."</span>)</div>
+                        <div class="pl-4 text-gray-400">conn.commit()</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MAIN VIEW SWITCHER MODE -->
+        <section class="space-y-6" data-aos="fade-up">
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4 border-b border-gray-800 pb-4">
+                <div>
+                    <h3 class="text-xl font-bold text-white flex items-center gap-2">
+                        <i data-lucide="layout-grid" class="w-5 h-5 text-cyan-400"></i> Mode Pembelajaran
+                    </h3>
+                    <p class="text-xs text-gray-400">Pilih metode eksplorasi materi yang disukai</p>
+                </div>
+                
+                <div class="flex bg-gray-900 p-1 rounded-xl border border-gray-800 text-xs font-semibold">
+                    <button onclick="switchMasterMode('sessions')" id="btn-mode-sessions" class="px-4 py-2 rounded-lg transition-all bg-cyan-600 text-white shadow-lg">
+                        1. Sesi Praktikum (P08 - P14)
+                    </button>
+                    <button onclick="switchMasterMode('projects')" id="btn-mode-projects" class="px-4 py-2 rounded-lg transition-all text-gray-400 hover:text-white">
+                        2. Project Studio & Code Viewer
+                    </button>
+                </div>
+            </div>
+
+            <!-- MODE 1: SESI PRAKTIKUM (P08 - P14) -->
+            <div id="section-sessions" class="space-y-8">
+                <!-- Session Nav Buttons -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-2" id="sessionTabs">
+                    <button onclick="switchSession(8)" id="btn-s8" class="p-3 rounded-xl border text-center transition-all bg-cyan-600/20 border-cyan-500 text-white shadow-lg">
+                        <div class="text-[10px] uppercase font-bold text-cyan-400">P08</div>
+                        <div class="text-xs font-bold truncate">For Loop</div>
+                    </button>
+                    <button onclick="switchSession(9)" id="btn-s9" class="p-3 rounded-xl border text-center transition-all bg-cardBg border-gray-800 text-gray-400 hover:border-gray-700 hover:text-white">
+                        <div class="text-[10px] uppercase font-bold text-gray-500">P09</div>
+                        <div class="text-xs font-bold truncate">While Loop</div>
+                    </button>
+                    <button onclick="switchSession(10)" id="btn-s10" class="p-3 rounded-xl border text-center transition-all bg-cardBg border-gray-800 text-gray-400 hover:border-gray-700 hover:text-white">
+                        <div class="text-[10px] uppercase font-bold text-gray-500">P10</div>
+                        <div class="text-xs font-bold truncate">List Data</div>
+                    </button>
+                    <button onclick="switchSession(11)" id="btn-s11" class="p-3 rounded-xl border text-center transition-all bg-cardBg border-gray-800 text-gray-400 hover:border-gray-700 hover:text-white">
+                        <div class="text-[10px] uppercase font-bold text-gray-500">P11</div>
+                        <div class="text-xs font-bold truncate">Dictionary</div>
+                    </button>
+                    <button onclick="switchSession(12)" id="btn-s12" class="p-3 rounded-xl border text-center transition-all bg-cardBg border-gray-800 text-gray-400 hover:border-gray-700 hover:text-white">
+                        <div class="text-[10px] uppercase font-bold text-gray-500">P12</div>
+                        <div class="text-xs font-bold truncate">Fungsi (`def`)</div>
+                    </button>
+                    <button onclick="switchSession(13)" id="btn-s13" class="p-3 rounded-xl border text-center transition-all bg-cardBg border-gray-800 text-gray-400 hover:border-gray-700 hover:text-white">
+                        <div class="text-[10px] uppercase font-bold text-gray-500">P13</div>
+                        <div class="text-xs font-bold truncate">SQLite Intro</div>
+                    </button>
+                    <button onclick="switchSession(14)" id="btn-s14" class="p-3 rounded-xl border text-center transition-all bg-cardBg border-gray-800 text-gray-400 hover:border-gray-700 hover:text-white">
+                        <div class="text-[10px] uppercase font-bold text-gray-500">P14</div>
+                        <div class="text-xs font-bold truncate">SQLite CRUD</div>
+                    </button>
+                </div>
+
+                <!-- Session Panels -->
+                <!-- P08 -->
+                <div id="session-8" class="session-box space-y-6">
+                    <div class="bg-cardBg border border-gray-800 rounded-2xl p-6 space-y-2">
+                        <h4 class="text-lg font-bold text-white flex items-center gap-2">
+                            <i data-lucide="repeat" class="w-5 h-5 text-cyan-400"></i> Pertemuan 08: Perulangan `for` & Fungsi `range()`
+                        </h4>
+                        <p class="text-xs sm:text-sm text-gray-300">Perulangan <code>for</code> digunakan untuk mengeksekusi blok kode secara berulang sesuai rentang (range) atau elemen urutan.</p>
+                    </div>
+                    <div class="grid md:grid-cols-12 gap-6">
+                        <div class="md:col-span-7 bg-gray-950 border border-gray-800 rounded-2xl overflow-hidden flex flex-col">
+                            <div class="bg-gray-900 px-4 py-3 border-b border-gray-800 flex items-center justify-between">
+                                <span class="text-xs font-mono text-cyan-400">for_loop_demo.py</span>
+                                <button onclick="runSimulatedCode(8)" class="px-3 py-1 bg-cyan-600 hover:bg-cyan-500 text-white rounded-lg text-xs font-bold transition-all flex items-center gap-1.5">
+                                    <i data-lucide="play" class="w-3.5 h-3.5"></i> Jalankan
+                                </button>
+                            </div>
+                            <textarea id="codeS8" rows="6" class="w-full bg-darkBg border-none p-4 text-xs font-mono text-green-400 focus:outline-none resize-none"># Menampilkan perkalian 5 sebanyak 5 kali
+for i in range(1, 6):
+    hasil = i * 5
+    print(f"5 x {i} = {hasil}")</textarea>
+                        </div>
+                        <div class="md:col-span-5 bg-gray-950 border border-gray-800 rounded-2xl p-4">
+                            <div class="text-xs font-bold text-gray-400 mb-2 border-b border-gray-800 pb-2">Output Konsol:</div>
+                            <div id="outputS8" class="font-mono text-xs text-gray-300 space-y-1">
+                                <div class="text-gray-500 italic">Klik "Jalankan" untuk mengeksekusi.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- P09 -->
+                <div id="session-9" class="session-box hidden space-y-6">
+                    <div class="bg-cardBg border border-gray-800 rounded-2xl p-6 space-y-2">
+                        <h4 class="text-lg font-bold text-white flex items-center gap-2">
+                            <i data-lucide="refresh-cw" class="w-5 h-5 text-blue-400"></i> Pertemuan 09: Perulangan `while` & Kondisi Henti
+                        </h4>
+                        <p class="text-xs sm:text-sm text-gray-300">Perulangan <code>while</code> berjalan selama kondisi logika bernilai <code>True</code>.</p>
+                    </div>
+                    <div class="grid md:grid-cols-12 gap-6">
+                        <div class="md:col-span-7 bg-gray-950 border border-gray-800 rounded-2xl overflow-hidden flex flex-col">
+                            <div class="bg-gray-900 px-4 py-3 border-b border-gray-800 flex items-center justify-between">
+                                <span class="text-xs font-mono text-blue-400">while_loop_demo.py</span>
+                                <button onclick="runSimulatedCode(9)" class="px-3 py-1 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-xs font-bold transition-all flex items-center gap-1.5">
+                                    <i data-lucide="play" class="w-3.5 h-3.5"></i> Jalankan
+                                </button>
+                            </div>
+                            <textarea id="codeS9" rows="6" class="w-full bg-darkBg border-none p-4 text-xs font-mono text-green-400 focus:outline-none resize-none">counter = 5
+while counter > 0:
+    print(f"Hitung mundur: {counter}")
+    counter -= 1
+print("Peluncuran Berhasil!")</textarea>
+                        </div>
+                        <div class="md:col-span-5 bg-gray-950 border border-gray-800 rounded-2xl p-4">
+                            <div class="text-xs font-bold text-gray-400 mb-2 border-b border-gray-800 pb-2">Output Konsol:</div>
+                            <div id="outputS9" class="font-mono text-xs text-gray-300 space-y-1">
+                                <div class="text-gray-500 italic">Klik "Jalankan" untuk mengeksekusi.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- P10 -->
+                <div id="session-10" class="session-box hidden space-y-6">
+                    <div class="bg-cardBg border border-gray-800 rounded-2xl p-6 space-y-2">
+                        <h4 class="text-lg font-bold text-white flex items-center gap-2">
+                            <i data-lucide="list" class="w-5 h-5 text-emerald-400"></i> Pertemuan 10: Tipe Data `List` & Manipulasi Indeks
+                        </h4>
+                        <p class="text-xs sm:text-sm text-gray-300"><code>List</code> adalah struktur data terurut yang menyimpan kumpulan elemen terstruktur.</p>
+                    </div>
+                    <div class="grid md:grid-cols-12 gap-6">
+                        <div class="md:col-span-7 bg-gray-950 border border-gray-800 rounded-2xl overflow-hidden flex flex-col">
+                            <div class="bg-gray-900 px-4 py-3 border-b border-gray-800 flex items-center justify-between">
+                                <span class="text-xs font-mono text-emerald-400">list_manipulation.py</span>
+                                <button onclick="runSimulatedCode(10)" class="px-3 py-1 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg text-xs font-bold transition-all flex items-center gap-1.5">
+                                    <i data-lucide="play" class="w-3.5 h-3.5"></i> Jalankan
+                                </button>
+                            </div>
+                            <textarea id="codeS10" rows="6" class="w-full bg-darkBg border-none p-4 text-xs font-mono text-green-400 focus:outline-none resize-none">santri = ["Ahmad", "Budi", "Chandra"]
+santri.append("Dhani")
+for idx, nama in enumerate(santri):
+    print(f"Indeks [{idx}]: {nama}")</textarea>
+                        </div>
+                        <div class="md:col-span-5 bg-gray-950 border border-gray-800 rounded-2xl p-4">
+                            <div class="text-xs font-bold text-gray-400 mb-2 border-b border-gray-800 pb-2">Output Konsol:</div>
+                            <div id="outputS10" class="font-mono text-xs text-gray-300 space-y-1">
+                                <div class="text-gray-500 italic">Klik "Jalankan" untuk mengeksekusi.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- P11 -->
+                <div id="session-11" class="session-box hidden space-y-6">
+                    <div class="bg-cardBg border border-gray-800 rounded-2xl p-6 space-y-2">
+                        <h4 class="text-lg font-bold text-white flex items-center gap-2">
+                            <i data-lucide="book" class="w-5 h-5 text-amber-400"></i> Pertemuan 11: Tipe Data `Dictionary` (Key-Value)
+                        </h4>
+                        <p class="text-xs sm:text-sm text-gray-300"><code>Dictionary</code> menyimpan pasangan data berpasangan <b>Key : Value</b>.</p>
+                    </div>
+                    <div class="grid md:grid-cols-12 gap-6">
+                        <div class="md:col-span-7 bg-gray-950 border border-gray-800 rounded-2xl overflow-hidden flex flex-col">
+                            <div class="bg-gray-900 px-4 py-3 border-b border-gray-800 flex items-center justify-between">
+                                <span class="text-xs font-mono text-amber-400">dictionary_demo.py</span>
+                                <button onclick="runSimulatedCode(11)" class="px-3 py-1 bg-amber-600 hover:bg-amber-500 text-white rounded-lg text-xs font-bold transition-all flex items-center gap-1.5">
+                                    <i data-lucide="play" class="w-3.5 h-3.5"></i> Jalankan
+                                </button>
+                            </div>
+                            <textarea id="codeS11" rows="6" class="w-full bg-darkBg border-none p-4 text-xs font-mono text-green-400 focus:outline-none resize-none">data_santri = {
+    "nisn": "12345",
+    "nama": "Ahmad Fauzi",
+    "hafalan_juz": 12
+}
+print(f"Nama   : {data_santri['nama']}")
+print(f"Hafalan: {data_santri['hafalan_juz']} Juz")</textarea>
+                        </div>
+                        <div class="md:col-span-5 bg-gray-950 border border-gray-800 rounded-2xl p-4">
+                            <div class="text-xs font-bold text-gray-400 mb-2 border-b border-gray-800 pb-2">Output Konsol:</div>
+                            <div id="outputS11" class="font-mono text-xs text-gray-300 space-y-1">
+                                <div class="text-gray-500 italic">Klik "Jalankan" untuk mengeksekusi.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- P12 -->
+                <div id="session-12" class="session-box hidden space-y-6">
+                    <div class="bg-cardBg border border-gray-800 rounded-2xl p-6 space-y-2">
+                        <h4 class="text-lg font-bold text-white flex items-center gap-2">
+                            <i data-lucide="box" class="w-5 h-5 text-purple-400"></i> Pertemuan 12: Pembuatan Fungsi Modular (`def`)
+                        </h4>
+                        <p class="text-xs sm:text-sm text-gray-300">Fungsi (<code>def</code>) membungkus logika program agar reusable dan efisien.</p>
+                    </div>
+                    <div class="grid md:grid-cols-12 gap-6">
+                        <div class="md:col-span-7 bg-gray-950 border border-gray-800 rounded-2xl overflow-hidden flex flex-col">
+                            <div class="bg-gray-900 px-4 py-3 border-b border-gray-800 flex items-center justify-between">
+                                <span class="text-xs font-mono text-purple-400">function_demo.py</span>
+                                <button onclick="runSimulatedCode(12)" class="px-3 py-1 bg-purple-600 hover:bg-purple-500 text-white rounded-lg text-xs font-bold transition-all flex items-center gap-1.5">
+                                    <i data-lucide="play" class="w-3.5 h-3.5"></i> Jalankan
+                                </button>
+                            </div>
+                            <textarea id="codeS12" rows="6" class="w-full bg-darkBg border-none p-4 text-xs font-mono text-green-400 focus:outline-none resize-none">def hitung_status(nilai):
+    if nilai >= 75:
+        return "Lolos Syarat"
+    return "Remedial"
+
+print(f"Nilai 85: {hitung_status(85)}")
+print(f"Nilai 60: {hitung_status(60)}")</textarea>
+                        </div>
+                        <div class="md:col-span-5 bg-gray-950 border border-gray-800 rounded-2xl p-4">
+                            <div class="text-xs font-bold text-gray-400 mb-2 border-b border-gray-800 pb-2">Output Konsol:</div>
+                            <div id="outputS12" class="font-mono text-xs text-gray-300 space-y-1">
+                                <div class="text-gray-500 italic">Klik "Jalankan" untuk mengeksekusi.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- P13 -->
+                <div id="session-13" class="session-box hidden space-y-6">
+                    <div class="bg-cardBg border border-gray-800 rounded-2xl p-6 space-y-2">
+                        <h4 class="text-lg font-bold text-white flex items-center gap-2">
+                            <i data-lucide="database" class="w-5 h-5 text-indigo-400"></i> Pertemuan 13: Database Relational SQLite3
+                        </h4>
+                        <p class="text-xs sm:text-sm text-gray-300">Modul bawaan <code>sqlite3</code> untuk membuat koneksi database dan skema tabel.</p>
+                    </div>
+                    <div class="grid md:grid-cols-12 gap-6">
+                        <div class="md:col-span-7 bg-gray-950 border border-gray-800 rounded-2xl overflow-hidden flex flex-col">
+                            <div class="bg-gray-900 px-4 py-3 border-b border-gray-800 flex items-center justify-between">
+                                <span class="text-xs font-mono text-indigo-400">sqlite_init.py</span>
+                                <button onclick="runSimulatedCode(13)" class="px-3 py-1 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg text-xs font-bold transition-all flex items-center gap-1.5">
+                                    <i data-lucide="play" class="w-3.5 h-3.5"></i> Jalankan
+                                </button>
+                            </div>
+                            <textarea id="codeS13" rows="6" class="w-full bg-darkBg border-none p-4 text-xs font-mono text-green-400 focus:outline-none resize-none">import sqlite3
+conn = sqlite3.connect("pesantren.db")
+cursor = conn.cursor()
+cursor.execute('''CREATE TABLE IF NOT EXISTS santri (id INTEGER PRIMARY KEY, nama TEXT)''')
+conn.commit()
+print("Koneksi & Database Berhasil Dibuat!")</textarea>
+                        </div>
+                        <div class="md:col-span-5 bg-gray-950 border border-gray-800 rounded-2xl p-4">
+                            <div class="text-xs font-bold text-gray-400 mb-2 border-b border-gray-800 pb-2">Output Konsol:</div>
+                            <div id="outputS13" class="font-mono text-xs text-gray-300 space-y-1">
+                                <div class="text-gray-500 italic">Klik "Jalankan" untuk mengeksekusi.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- P14 -->
+                <div id="session-14" class="session-box hidden space-y-6">
+                    <div class="bg-cardBg border border-gray-800 rounded-2xl p-6 space-y-2">
+                        <h4 class="text-lg font-bold text-white flex items-center gap-2">
+                            <i data-lucide="server" class="w-5 h-5 text-emerald-400"></i> Pertemuan 14: Operasi Database Lengkap (CRUD)
+                        </h4>
+                        <p class="text-xs sm:text-sm text-gray-300">Operasi dasar database: <b>Create</b>, <b>Read</b>, <b>Update</b>, dan <b>Delete</b>.</p>
+                    </div>
+                    <div class="grid md:grid-cols-12 gap-6">
+                        <div class="md:col-span-7 bg-gray-950 border border-gray-800 rounded-2xl overflow-hidden flex flex-col">
+                            <div class="bg-gray-900 px-4 py-3 border-b border-gray-800 flex items-center justify-between">
+                                <span class="text-xs font-mono text-emerald-400">sqlite_crud.py</span>
+                                <button onclick="runSimulatedCode(14)" class="px-3 py-1 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg text-xs font-bold transition-all flex items-center gap-1.5">
+                                    <i data-lucide="play" class="w-3.5 h-3.5"></i> Jalankan
+                                </button>
+                            </div>
+                            <textarea id="codeS14" rows="6" class="w-full bg-darkBg border-none p-4 text-xs font-mono text-green-400 focus:outline-none resize-none">cursor.execute("INSERT INTO santri (nama, hafalan) VALUES ('Ahmad', 10)")
+cursor.execute("SELECT * FROM santri")
+for row in cursor.fetchall():
+    print(f"ID: {row[0]} | Nama: {row[1]}")</textarea>
+                        </div>
+                        <div class="md:col-span-5 bg-gray-950 border border-gray-800 rounded-2xl p-4">
+                            <div class="text-xs font-bold text-gray-400 mb-2 border-b border-gray-800 pb-2">Output Konsol:</div>
+                            <div id="outputS14" class="font-mono text-xs text-gray-300 space-y-1">
+                                <div class="text-gray-500 italic">Klik "Jalankan" untuk mengeksekusi.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MODE 2: PROJECT STUDIO & INTERACTIVE SIMULATOR (HIDDEN BY DEFAULT) -->
+            <div id="section-projects" class="hidden space-y-8">
+                <!-- Studio Navigation Tabs -->
+                <div class="grid grid-cols-2 gap-3">
+                    <button onclick="switchStudioTab('kasir')" id="btn-studio-kasir" class="p-4 rounded-2xl border text-left transition-all bg-emerald-600/20 border-emerald-500 text-white shadow-lg">
+                        <div class="text-[10px] uppercase font-bold text-emerald-400">Project Studio 1</div>
+                        <div class="text-sm font-bold mt-0.5">Kasir Kantin Digital (Interactive Web)</div>
+                    </button>
+                    <button onclick="switchStudioTab('db')" id="btn-studio-db" class="p-4 rounded-2xl border text-left transition-all bg-cardBg border-gray-800 text-gray-400 hover:border-gray-700 hover:text-white">
+                        <div class="text-[10px] uppercase font-bold text-gray-500">Project Studio 2</div>
+                        <div class="text-sm font-bold mt-0.5">Database Santri SQLite (CRUD Application)</div>
+                    </button>
+                </div>
+
+                <!-- PROJECT 1: KASIR KANTIN -->
+                <div id="studio-kasir" class="studio-box space-y-6">
+                    <div class="bg-cardBg border border-gray-800 rounded-2xl p-6 space-y-6">
+                        <div class="flex items-center gap-3">
+                            <i data-lucide="shopping-cart" class="w-6 h-6 text-emerald-400"></i>
+                            <div>
+                                <h4 class="text-lg font-bold text-white">Simulasi Application Kasir Kantin</h4>
+                                <p class="text-xs text-gray-400">Integrasi List, Dict, Loop, dan Perhitungan Diskon Member</p>
+                            </div>
+                        </div>
+
+                        <div class="grid md:grid-cols-12 gap-6">
+                            <div class="md:col-span-5 bg-gray-950 border border-gray-800 rounded-xl p-4 space-y-4">
+                                <h5 class="text-xs font-bold text-emerald-400 uppercase tracking-wider">Input Pesanan</h5>
+                                <div class="space-y-3 text-xs">
+                                    <div>
+                                        <label class="block text-gray-400 mb-1">Menu Kantin</label>
+                                        <select id="kasirMenuSelect" class="w-full bg-darkBg border border-gray-800 rounded-lg p-2.5 text-gray-200">
+                                            <option value="Nasi Goreng Kantin|12000">Nasi Goreng Kantin - Rp 12.000</option>
+                                            <option value="Mie Ayam Bakso|15000">Mie Ayam Bakso - Rp 15.000</option>
+                                            <option value="Es Teh Manis|4000">Es Teh Manis - Rp 4.000</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-gray-400 mb-1">Porsi</label>
+                                        <input type="number" id="kasirQtyInput" value="1" min="1" class="w-full bg-darkBg border border-gray-800 rounded-lg p-2.5 text-gray-200">
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <input type="checkbox" id="kasirMemberCheck" class="rounded border-gray-800 text-emerald-500">
+                                        <label for="kasirMemberCheck" class="text-gray-300">Member Santri (Diskon 10%)</label>
+                                    </div>
+                                    <button onclick="tambahKeKeranjang()" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-lg transition-all flex items-center justify-center gap-2">
+                                        <i data-lucide="plus-circle" class="w-4 h-4"></i> Tambah Item
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="md:col-span-7 bg-gray-950 border border-gray-800 rounded-xl p-4 flex flex-col justify-between">
+                                <div>
+                                    <div class="flex justify-between items-center border-b border-gray-800 pb-2 mb-3">
+                                        <span class="text-xs font-bold text-white flex items-center gap-2"><i data-lucide="receipt" class="w-4 h-4 text-emerald-400"></i> Struk Belanja</span>
+                                        <button onclick="resetKasir()" class="text-[10px] text-red-400 hover:underline">Reset</button>
+                                    </div>
+                                    <div id="keranjangList" class="space-y-2 text-xs font-mono max-h-48 overflow-y-auto">
+                                        <div class="text-gray-500 italic">Belum ada item.</div>
+                                    </div>
+                                </div>
+                                <div class="border-t border-gray-800 pt-3 mt-4 space-y-1 text-xs font-mono">
+                                    <div class="flex justify-between text-gray-400"><span>Subtotal:</span><span id="txtSubtotal">Rp 0</span></div>
+                                    <div class="flex justify-between text-emerald-400"><span>Diskon:</span><span id="txtDiskon">Rp 0</span></div>
+                                    <div class="flex justify-between text-base font-bold text-white pt-2 border-t border-gray-800"><span>Total:</span><span id="txtTotalBayar" class="text-emerald-400">Rp 0</span></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Source Code Viewer -->
+                        <div class="pt-2 border-t border-gray-800">
+                            <button onclick="toggleProjectCode('code-proj-kasir', 'btn-text-kasir')" class="w-full py-2 bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 text-amber-300 rounded-xl text-xs font-semibold transition-all flex items-center justify-center gap-2">
+                                <i data-lucide="code" class="w-4 h-4"></i>
+                                <span id="btn-text-kasir">Lihat Source Code Python (kasir_kantin.py)</span>
+                            </button>
+                            <div id="code-proj-kasir" class="hidden mt-4 bg-gray-950 border border-gray-800 rounded-xl overflow-hidden text-xs">
+                                <div class="bg-gray-900 px-3 py-2 border-b border-gray-800 flex justify-between items-center">
+                                    <span class="font-mono text-amber-400">kasir_kantin.py</span>
+                                    <button onclick="copyToClipboard('code-text-kasir')" class="text-gray-400 hover:text-white flex items-center gap-1 bg-gray-800 px-2 py-0.5 rounded text-[10px]">
+                                        <i data-lucide="copy" class="w-3 h-3"></i> Copy Code
+                                    </button>
+                                </div>
+                                <pre class="p-4 font-mono text-gray-300 overflow-x-auto max-h-80"><code id="code-text-kasir">menu = {"1": {"nama": "Nasi Goreng", "harga": 12000}, "2": {"nama": "Es Teh", "harga": 4000}}
+keranjang = []
+# Simpan & Olah Struk
+total = sum(item['subtotal'] for item in keranjang)
+print(f"Total Bayar: Rp{total}")</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PROJECT 2: DATABASE SANTRI CRUD -->
+                <div id="studio-db" class="studio-box hidden space-y-6">
+                    <div class="bg-cardBg border border-gray-800 rounded-2xl p-6 space-y-6">
+                        <div class="flex items-center gap-3">
+                            <i data-lucide="hard-drive" class="w-6 h-6 text-amber-400"></i>
+                            <div>
+                                <h4 class="text-lg font-bold text-white">Simulasi System Database Santri SQLite (CRUD)</h4>
+                                <p class="text-xs text-gray-400">Simulasi Operasi Tambah & Hapus Data secara Real-Time</p>
+                            </div>
+                        </div>
+
+                        <div class="grid md:grid-cols-12 gap-6">
+                            <div class="md:col-span-5 bg-gray-950 border border-gray-800 rounded-xl p-4 space-y-4">
+                                <h5 class="text-xs font-bold text-amber-400 uppercase tracking-wider flex items-center gap-1.5"><i data-lucide="user-plus" class="w-4 h-4"></i> Input Santri</h5>
+                                <div class="space-y-3 text-xs">
+                                    <div><label class="block text-gray-400 mb-1">NIS</label><input type="text" id="dbNis" placeholder="1003" class="w-full bg-darkBg border border-gray-800 rounded-lg p-2.5 text-gray-200"></div>
+                                    <div><label class="block text-gray-400 mb-1">Nama</label><input type="text" id="dbNama" placeholder="Nama Santri" class="w-full bg-darkBg border border-gray-800 rounded-lg p-2.5 text-gray-200"></div>
+                                    <div>
+                                        <label class="block text-gray-400 mb-1">Kelas</label>
+                                        <select id="dbKelas" class="w-full bg-darkBg border border-gray-800 rounded-lg p-2.5 text-gray-200"><option>11-A</option><option>11-B</option></select>
+                                    </div>
+                                    <button onclick="simpanSantri()" class="w-full py-2.5 bg-amber-600 hover:bg-amber-500 text-white font-bold rounded-lg transition-all flex items-center justify-center gap-2">
+                                        <i data-lucide="database" class="w-4 h-4"></i> Simpan ke DB
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="md:col-span-7 bg-gray-950 border border-gray-800 rounded-xl p-4 space-y-3">
+                                <div class="flex justify-between items-center border-b border-gray-800 pb-2">
+                                    <span class="text-xs font-bold text-white flex items-center gap-2"><i data-lucide="table" class="w-4 h-4 text-amber-400"></i> Tabel `santri_app.db`</span>
+                                </div>
+                                <div class="overflow-x-auto">
+                                    <table class="w-full text-left text-xs font-mono">
+                                        <thead class="bg-gray-900 text-amber-400 border-b border-gray-800">
+                                            <tr><th class="p-2">NIS</th><th class="p-2">Nama</th><th class="p-2">Kelas</th><th class="p-2 text-center">Aksi</th></tr>
+                                        </thead>
+                                        <tbody id="santriTableBody" class="divide-y divide-gray-800 text-gray-300"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Source Code Viewer -->
+                        <div class="pt-2 border-t border-gray-800">
+                            <button onclick="toggleProjectCode('code-proj-santri', 'btn-text-santri')" class="w-full py-2 bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 rounded-xl text-xs font-semibold transition-all flex items-center justify-center gap-2">
+                                <i data-lucide="code" class="w-4 h-4"></i>
+                                <span id="btn-text-santri">Lihat Source Code Python Lengkap (db_santri_crud.py)</span>
+                            </button>
+                            <div id="code-proj-santri" class="hidden mt-4 bg-gray-950 border border-gray-800 rounded-xl overflow-hidden text-xs">
+                                <div class="bg-gray-900 px-3 py-2 border-b border-gray-800 flex justify-between items-center">
+                                    <span class="font-mono text-emerald-400">db_santri_crud.py</span>
+                                    <button onclick="copyToClipboard('code-text-santri')" class="text-gray-400 hover:text-white flex items-center gap-1 bg-gray-800 px-2 py-0.5 rounded text-[10px]">
+                                        <i data-lucide="copy" class="w-3 h-3"></i> Copy Code
+                                    </button>
+                                </div>
+                                <pre class="p-4 font-mono text-gray-300 overflow-x-auto max-h-80"><code id="code-text-santri">import sqlite3
+
+def init_db():
+    conn = sqlite3.connect('santri_app.db')
+    cursor = conn.cursor()
+    cursor.execute('''CREATE TABLE IF NOT EXISTS santri (nis TEXT PRIMARY KEY, nama TEXT, kelas TEXT)''')
+    conn.commit()
+    conn.close()
+
+init_db()</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-800/80 bg-cardBg/60 py-8 text-center text-xs text-gray-500">
+        <p>© 2026 Curriculum CS • Hybrid Python & SQLite Master Edition</p>
+    </footer>
+
+    <!-- Combined Scripts -->
+    <script>
+        AOS.init({ duration: 700, once: true });
+        lucide.createIcons();
+
+        // MASTER MODE SWITCHER
+        function switchMasterMode(mode) {
+            if (mode === 'sessions') {
+                document.getElementById('section-sessions').classList.remove('hidden');
+                document.getElementById('section-projects').classList.add('hidden');
+                document.getElementById('btn-mode-sessions').className = "px-4 py-2 rounded-lg transition-all bg-cyan-600 text-white shadow-lg";
+                document.getElementById('btn-mode-projects').className = "px-4 py-2 rounded-lg transition-all text-gray-400 hover:text-white";
+            } else {
+                document.getElementById('section-sessions').classList.add('hidden');
+                document.getElementById('section-projects').classList.remove('hidden');
+                document.getElementById('btn-mode-projects').className = "px-4 py-2 rounded-lg transition-all bg-cyan-600 text-white shadow-lg";
+                document.getElementById('btn-mode-sessions').className = "px-4 py-2 rounded-lg transition-all text-gray-400 hover:text-white";
+            }
+        }
+
+        // SESSION TAB SWITCHER (P08 - P14)
+        function switchSession(id) {
+            document.querySelectorAll('.session-box').forEach(el => el.classList.add('hidden'));
+            document.getElementById(`session-${id}`).classList.remove('hidden');
+            [8, 9, 10, 11, 12, 13, 14].forEach(sId => {
+                const btn = document.getElementById(`btn-s${sId}`);
+                if (sId === id) {
+                    btn.className = "p-3 rounded-xl border text-center transition-all bg-cyan-600/20 border-cyan-500 text-white shadow-lg";
+                } else {
+                    btn.className = "p-3 rounded-xl border text-center transition-all bg-cardBg border-gray-800 text-gray-400 hover:border-gray-700 hover:text-white";
+                }
+            });
+        }
+
+        // SIMULATED TERMINAL OUTPUT
+        function runSimulatedCode(id) {
+            const outBox = document.getElementById(`outputS${id}`);
+            outBox.innerHTML = '';
+            const responses = {
+                8: ['5 x 1 = 5', '5 x 2 = 10', '5 x 3 = 15', '5 x 4 = 20', '5 x 5 = 25'],
+                9: ['Hitung mundur: 5', 'Hitung mundur: 4', 'Hitung mundur: 3', 'Hitung mundur: 2', 'Hitung mundur: 1', 'Peluncuran Berhasil!'],
+                10: ['Indeks [0]: Ahmad', 'Indeks [1]: Budi', 'Indeks [2]: Chandra', 'Indeks [3]: Dhani'],
+                11: ['Nama   : Ahmad Fauzi', 'Hafalan: 12 Juz'],
+                12: ['Nilai 85: Lolos Syarat', 'Nilai 60: Remedial'],
+                13: ['[INFO] Database connected.', '[SUCCESS] Table verified.'],
+                14: ['1 Row(s) Affected (INSERT)', 'ID: 1 | Nama: Ahmad']
+            };
+            responses[id].forEach(text => {
+                const d = document.createElement('div');
+                d.className = "text-emerald-400 font-mono";
+                d.textContent = text;
+                outBox.appendChild(d);
+            });
+        }
+
+        // STUDIO TAB SWITCHER
+        function switchStudioTab(tab) {
+            document.querySelectorAll('.studio-box').forEach(el => el.classList.add('hidden'));
+            document.getElementById(`studio-${tab}`).classList.remove('hidden');
+            if (tab === 'kasir') {
+                document.getElementById('btn-studio-kasir').className = "p-4 rounded-2xl border text-left transition-all bg-emerald-600/20 border-emerald-500 text-white shadow-lg";
+                document.getElementById('btn-studio-db').className = "p-4 rounded-2xl border text-left transition-all bg-cardBg border-gray-800 text-gray-400 hover:border-gray-700 hover:text-white";
+            } else {
+                document.getElementById('btn-studio-db').className = "p-4 rounded-2xl border text-left transition-all bg-amber-600/20 border-amber-500 text-white shadow-lg";
+                document.getElementById('btn-studio-kasir').className = "p-4 rounded-2xl border text-left transition-all bg-cardBg border-gray-800 text-gray-400 hover:border-gray-700 hover:text-white";
+            }
+        }
+
+        // KASIR LOGIC ENGINE
+        let keranjang = [];
+        function tambahKeKeranjang() {
+            const menuVal = document.getElementById('kasirMenuSelect').value;
+            const qty = parseInt(document.getElementById('kasirQtyInput').value);
+            const [nama, hargaStr] = menuVal.split('|');
+            const harga = parseInt(hargaStr);
+            if (!qty || qty <= 0) return;
+            keranjang.push({ nama, harga, qty, total: harga * qty });
+            renderKeranjang();
+        }
+        function resetKasir() { keranjang = []; renderKeranjang(); }
+        function renderKeranjang() {
+            const box = document.getElementById('keranjangList');
+            const isMember = document.getElementById('kasirMemberCheck').checked;
+            box.innerHTML = '';
+            let subtotal = 0;
+            if (keranjang.length === 0) {
+                box.innerHTML = '<div class="text-gray-500 italic">Belum ada item.</div>';
+            } else {
+                keranjang.forEach(i => {
+                    subtotal += i.total;
+                    box.innerHTML += `<div class="flex justify-between text-gray-300 bg-gray-900/60 p-2 rounded"><div>${i.nama} x${i.qty}</div><div class="text-emerald-400">Rp ${i.total.toLocaleString()}</div></div>`;
+                });
+            }
+            const diskon = isMember ? subtotal * 0.1 : 0;
+            document.getElementById('txtSubtotal').textContent = `Rp ${subtotal.toLocaleString()}`;
+            document.getElementById('txtDiskon').textContent = `Rp ${diskon.toLocaleString()}`;
+            document.getElementById('txtTotalBayar').textContent = `Rp ${(subtotal - diskon).toLocaleString()}`;
+        }
+
+        // SQLITE SANTRI ENGINE
+        let santriData = [{ nis: "1001", nama: "Ahmad Rizki", kelas: "11-A" }];
+        function renderSantriTable() {
+            const tbody = document.getElementById('santriTableBody');
+            tbody.innerHTML = '';
+            santriData.forEach((s, idx) => {
+                tbody.innerHTML += `<tr class="hover:bg-gray-900"><td class="p-2 text-amber-400">${s.nis}</td><td class="p-2 text-white">${s.nama}</td><td class="p-2">${s.kelas}</td><td class="p-2 text-center"><button onclick="hapusSantri(${idx})" class="text-red-400"><i data-lucide="trash-2" class="w-3 h-3"></i></button></td></tr>`;
+            });
+            lucide.createIcons();
+        }
+        function simpanSantri() {
+            const nis = document.getElementById('dbNis').value;
+            const nama = document.getElementById('dbNama').value;
+            const kelas = document.getElementById('dbKelas').value;
+            if (!nis || !nama) return alert("NIS dan Nama Wajib diisi!");
+            santriData.push({ nis, nama, kelas });
+            document.getElementById('dbNis').value = '';
+            document.getElementById('dbNama').value = '';
+            renderSantriTable();
+        }
+        function hapusSantri(idx) { santriData.splice(idx, 1); renderSantriTable(); }
+
+        // UTILS
+        function toggleProjectCode(codeId, textId) {
+            const el = document.getElementById(codeId);
+            el.classList.toggle('hidden');
+        }
+        function copyToClipboard(id) {
+            navigator.clipboard.writeText(document.getElementById(id).innerText);
+            alert("Kode disalin ke clipboard!");
+        }
+
+        renderSantriTable();
+    </script>
+</body>
+</html>

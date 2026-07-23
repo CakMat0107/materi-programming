@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="id" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pertemuan 01 - Pengenalan CS & Computational Thinking</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        darkBg: '#090d16',
+                        cardBg: '#111827',
+                        accentBlue: '#3b82f6',
+                        accentCyan: '#06b6d4',
+                        accentGreen: '#10b981',
+                        accentPurple: '#8b5cf6',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .glow-blue { box-shadow: 0 0 30px -5px rgba(59, 130, 246, 0.25); }
+        .glow-cyan { box-shadow: 0 0 30px -5px rgba(6, 182, 212, 0.25); }
+        .gradient-text {
+            background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 50%, #38bdf8 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        @keyframes pulse-slow {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.05); }
+        }
+        .animate-pulse-slow {
+            animation: pulse-slow 6s infinite ease-in-out;
+        }
+        pre code {
+            font-family: 'Fira Code', 'Courier New', Courier, monospace;
+        }
+    </style>
+</head>
+<body class="bg-darkBg text-gray-200 font-sans antialiased min-h-screen selection:bg-blue-500 selection:text-white relative overflow-x-hidden">
+
+    <!-- Ambient Glowing Background Lights -->
+    <div class="fixed top-0 left-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none animate-pulse-slow"></div>
+    <div class="fixed top-1/3 right-10 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl pointer-events-none animate-pulse-slow" style="animation-delay: 2s;"></div>
+    <div class="fixed bottom-10 left-10 w-96 h-96 bg-cyan-600/10 rounded-full blur-3xl pointer-events-none animate-pulse-slow" style="animation-delay: 4s;"></div>
+
+    <!-- Header Navigation -->
+    <header class="border-b border-gray-800/80 bg-cardBg/80 backdrop-blur-md sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <a href="silabus.html" class="p-2 bg-blue-600/20 border border-blue-500/30 rounded-xl text-blue-400 hover:bg-blue-600/30 transition-all">
+                    <i data-lucide="arrow-left" class="w-5 h-5"></i>
+                </a>
+                <div>
+                    <span class="text-xs font-semibold text-blue-400 uppercase tracking-wider">Kelas 11 • Semester 1</span>
+                    <h1 class="text-base sm:text-lg font-bold text-white">Pertemuan 01: Modul Materi</h1>
+                </div>
+            </div>
+            <div class="hidden sm:flex items-center gap-2 text-xs bg-gray-900/90 border border-gray-800 px-3 py-1.5 rounded-lg">
+                <i data-lucide="clock" class="w-4 h-4 text-blue-400"></i>
+                <span>2 x 45 Menit</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-10 space-y-16">
+
+        <!-- HERO SECTION -->
+        <section class="relative bg-cardBg border border-blue-500/30 rounded-3xl p-6 sm:p-10 glow-blue overflow-hidden" data-aos="fade-up">
+            <div class="grid md:grid-cols-12 gap-8 items-center">
+                <div class="md:col-span-7 space-y-4">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400 text-xs font-semibold">
+                        <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> Fundamental Science
+                    </div>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white leading-tight">
+                        Pengenalan CS & <br><span class="gradient-text">Computational Thinking</span>
+                    </h2>
+                    <p class="text-gray-400 text-sm sm:text-base leading-relaxed">
+                        Belajar cara berpikir seperti seorang <i>Computer Scientist</i>: memecahkan masalah kompleks secara logis, terstruktur, dan efisien menggunakan 4 pilar komputasional.
+                    </p>
+                    <div class="pt-2 flex flex-wrap gap-3">
+                        <a href="#simulator" class="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-xs font-semibold transition-all flex items-center gap-2">
+                            <i data-lucide="play-circle" class="w-4 h-4"></i> Coba Simulator & Code
+                        </a>
+                        <a href="#tugas" class="px-4 py-2 bg-gray-800 hover:bg-gray-700 border border-gray-700 text-gray-300 rounded-xl text-xs font-semibold transition-all flex items-center gap-2">
+                            <i data-lucide="code" class="w-4 h-4"></i> Contoh Solusi Tugas
+                        </a>
+                    </div>
+                </div>
+
+                <div class="md:col-span-5 flex justify-center relative">
+                    <div class="w-64 h-64 sm:w-72 sm:h-72 rounded-2xl bg-gradient-to-tr from-blue-900/40 via-purple-900/20 to-cyan-900/40 border border-blue-500/30 flex items-center justify-center p-6 relative group">
+                        <div class="absolute inset-0 bg-blue-500/10 rounded-2xl blur-xl group-hover:bg-blue-500/20 transition-all"></div>
+                        <div class="relative z-10 flex flex-col items-center text-center space-y-3">
+                            <div class="p-4 bg-darkBg/80 border border-blue-400/40 rounded-2xl shadow-xl">
+                                <i data-lucide="brain-circuit" class="w-16 h-16 text-blue-400 animate-pulse"></i>
+                            </div>
+                            <span class="text-xs font-mono text-cyan-300 bg-cyan-950/60 px-3 py-1 rounded-full border border-cyan-800">
+                                Problem_Solving.exe
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 1: WHAT IS CS? -->
+        <section class="space-y-6" data-aos="fade-up">
+            <div class="flex items-center gap-3">
+                <div class="p-2 bg-blue-500/10 rounded-lg text-blue-400 border border-blue-500/20">
+                    <i data-lucide="help-circle" class="w-5 h-5"></i>
+                </div>
+                <h3 class="text-xl font-bold text-white">1. Apa itu Computer Science?</h3>
+            </div>
+
+            <div class="grid sm:grid-cols-2 gap-4">
+                <div class="bg-cardBg/60 border border-red-500/30 p-5 rounded-2xl">
+                    <div class="flex items-center gap-2 text-red-400 font-bold text-sm mb-2">
+                        <i data-lucide="x-circle" class="w-4 h-4"></i> Mitos Populer
+                    </div>
+                    <p class="text-gray-300 text-sm">
+                        Belajar CS berarti sekadar belajar mengetik cepat, memperbaiki laptop rusak, menginstal Windows, atau memakai Word/Excel.
+                    </p>
+                </div>
+                <div class="bg-cardBg/60 border border-emerald-500/30 p-5 rounded-2xl">
+                    <div class="flex items-center gap-2 text-emerald-400 font-bold text-sm mb-2">
+                        <i data-lucide="check-circle-2" class="w-4 h-4"></i> Fakta Sebenarnya
+                    </div>
+                    <p class="text-gray-300 text-sm">
+                        Computer Science adalah <b>seni memecahkan masalah (Problem Solving)</b> secara sistematis dengan instruksi yang presisi kepada komputer.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: 4 PILARS OF CT -->
+        <section id="pilar" class="space-y-6" data-aos="fade-up">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="p-2 bg-purple-500/10 rounded-lg text-purple-400 border border-purple-500/20">
+                        <i data-lucide="cpu" class="w-5 h-5"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white">2. Empat Pilar Computational Thinking</h3>
+                </div>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <!-- Pilar 1 -->
+                <div class="bg-cardBg border border-gray-800 p-5 rounded-2xl">
+                    <div class="p-3 bg-blue-500/10 text-blue-400 w-fit rounded-xl border border-blue-500/20 mb-4">
+                        <i data-lucide="scissors" class="w-6 h-6"></i>
+                    </div>
+                    <span class="text-xs font-mono text-blue-400">Pilar 01</span>
+                    <h4 class="text-base font-bold text-white mt-1">Dekomposisi</h4>
+                    <p class="text-xs text-gray-400 mt-2">Memecah masalah besar menjadi bagian-bagian kecil yang mudah dikelola.</p>
+                </div>
+                <!-- Pilar 2 -->
+                <div class="bg-cardBg border border-gray-800 p-5 rounded-2xl">
+                    <div class="p-3 bg-purple-500/10 text-purple-400 w-fit rounded-xl border border-purple-500/20 mb-4">
+                        <i data-lucide="git-merge" class="w-6 h-6"></i>
+                    </div>
+                    <span class="text-xs font-mono text-purple-400">Pilar 02</span>
+                    <h4 class="text-base font-bold text-white mt-1">Pengenalan Pola</h4>
+                    <p class="text-xs text-gray-400 mt-2">Mencari kesamaan atau tren dari masalah yang pernah diselesaikan.</p>
+                </div>
+                <!-- Pilar 3 -->
+                <div class="bg-cardBg border border-gray-800 p-5 rounded-2xl">
+                    <div class="p-3 bg-cyan-500/10 text-cyan-400 w-fit rounded-xl border border-cyan-500/20 mb-4">
+                        <i data-lucide="eye-off" class="w-6 h-6"></i>
+                    </div>
+                    <span class="text-xs font-mono text-cyan-400">Pilar 03</span>
+                    <h4 class="text-base font-bold text-white mt-1">Abstraksi</h4>
+                    <p class="text-xs text-gray-400 mt-2">Fokus HANYA pada informasi penting dan mengabaikan detail tak relevan.</p>
+                </div>
+                <!-- Pilar 4 -->
+                <div class="bg-cardBg border border-gray-800 p-5 rounded-2xl">
+                    <div class="p-3 bg-emerald-500/10 text-emerald-400 w-fit rounded-xl border border-emerald-500/20 mb-4">
+                        <i data-lucide="list-ordered" class="w-6 h-6"></i>
+                    </div>
+                    <span class="text-xs font-mono text-emerald-400">Pilar 04</span>
+                    <h4 class="text-base font-bold text-white mt-1">Algoritma</h4>
+                    <p class="text-xs text-gray-400 mt-2">Menyusun langkah-langkah logis secara urut dan presisi.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: FLOWCHART SYMBOLS -->
+        <section class="space-y-6" data-aos="fade-up">
+            <div class="flex items-center gap-3">
+                <div class="p-2 bg-cyan-500/10 rounded-lg text-cyan-400 border border-cyan-500/20">
+                    <i data-lucide="workflow" class="w-5 h-5"></i>
+                </div>
+                <h3 class="text-xl font-bold text-white">3. Simbol Standar Flowchart</h3>
+            </div>
+
+            <div class="bg-cardBg border border-gray-800 rounded-2xl p-6 overflow-x-auto">
+                <table class="w-full text-left border-collapse min-w-[500px]">
+                    <thead>
+                        <tr class="border-b border-gray-800 text-xs font-semibold text-gray-400 uppercase">
+                            <th class="py-3 px-4">Bentuk Visual</th>
+                            <th class="py-3 px-4">Nama Simbol</th>
+                            <th class="py-3 px-4">Fungsi / Kegunaan</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-800/60 text-sm">
+                        <tr>
+                            <td class="py-3.5 px-4"><div class="w-24 h-8 rounded-full border-2 border-blue-400 bg-blue-500/10 flex items-center justify-center text-xs font-mono text-blue-300">Terminator</div></td>
+                            <td class="py-3.5 px-4 font-semibold text-white">Terminator</td>
+                            <td class="py-3.5 px-4 text-gray-400">Menandai titik <b>Mulai (Start)</b> atau <b>Selesai (End)</b>.</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3.5 px-4"><div class="w-24 h-8 -skew-x-12 border-2 border-purple-400 bg-purple-500/10 flex items-center justify-center text-xs font-mono text-purple-300"><span class="skew-x-12">Input/Output</span></div></td>
+                            <td class="py-3.5 px-4 font-semibold text-white">Input / Output</td>
+                            <td class="py-3.5 px-4 text-gray-400">Menerima masukan data atau menampilkan hasil output.</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3.5 px-4"><div class="w-24 h-8 border-2 border-emerald-400 bg-emerald-500/10 flex items-center justify-center text-xs font-mono text-emerald-300">Process</div></td>
+                            <td class="py-3.5 px-4 font-semibold text-white">Process</td>
+                            <td class="py-3.5 px-4 text-gray-400">Proses perhitungan rumus atau manipulasi data.</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3.5 px-4"><div class="w-10 h-10 rotate-45 border-2 border-amber-400 bg-amber-500/10 flex items-center justify-center text-[10px] font-mono text-amber-300"><span class="-rotate-45">Decision</span></div></td>
+                            <td class="py-3.5 px-4 font-semibold text-white">Decision</td>
+                            <td class="py-3.5 px-4 text-gray-400">Pengondisian bercabang (Ya / Tidak).</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ================= SECTION 4: INTERACTIVE SIMULATOR WITH CODE VIEWER ================= -->
+        <section id="simulator" class="space-y-6" data-aos="fade-up">
+            <div class="flex items-center justify-between flex-wrap gap-3">
+                <div class="flex items-center gap-3">
+                    <div class="p-2 bg-emerald-500/10 rounded-lg text-emerald-400 border border-emerald-500/20">
+                        <i data-lucide="play" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-white">4. Interactive Flowchart Simulator</h3>
+                        <p class="text-xs text-gray-400">Uji logika kelulusan & lihat bentuk kodenya secara langsung!</p>
+                    </div>
+                </div>
+
+                <!-- Toggle View Button (Simulasi vs Coding) -->
+                <button onclick="toggleSectionCode('sec4-code-wrapper', 'sec4-btn-icon', 'sec4-btn-text')" class="px-4 py-2 bg-blue-600/20 hover:bg-blue-600/30 border border-blue-500/40 text-blue-300 rounded-xl text-xs font-semibold transition-all flex items-center gap-2">
+                    <i id="sec4-btn-icon" data-lucide="code" class="w-4 h-4"></i>
+                    <span id="sec4-btn-text">Lihat Source Code</span>
+                </button>
+            </div>
+
+            <div class="bg-cardBg border border-emerald-500/30 rounded-3xl p-6 sm:p-8 glow-cyan space-y-6">
+                
+                <!-- Interactive Simulator Box -->
+                <div class="grid md:grid-cols-12 gap-8 items-center">
+                    <!-- Left Flowchart Visual -->
+                    <div class="md:col-span-7 space-y-3 flex flex-col items-center">
+                        <div class="w-36 h-9 rounded-full border-2 border-blue-400 bg-blue-950/60 flex items-center justify-center text-xs font-mono text-blue-300">START</div>
+                        <i data-lucide="arrow-down" class="w-4 h-4 text-gray-500"></i>
+                        <div class="w-48 h-9 -skew-x-12 border-2 border-purple-400 bg-purple-950/60 flex items-center justify-center text-xs font-mono text-purple-300"><span class="skew-x-12">Input Nilai (N)</span></div>
+                        <i data-lucide="arrow-down" class="w-4 h-4 text-gray-500"></i>
+                        <div class="w-28 h-28 rotate-45 border-2 border-amber-400 bg-amber-950/80 flex items-center justify-center text-[11px] font-mono text-amber-300 text-center p-2 my-2 shadow-lg">
+                            <span class="-rotate-45">Apakah N &ge; 75 ?</span>
+                        </div>
+                        <div class="w-full flex justify-around text-xs font-mono px-6 -mt-2">
+                            <span class="text-emerald-400 flex items-center gap-1">↙ YA (True)</span>
+                            <span class="text-red-400 flex items-center gap-1">TIDAK (False) ↘</span>
+                        </div>
+                        <div class="w-full flex justify-between gap-4 pt-2">
+                            <div id="node-lulus" class="flex-1 h-10 border-2 border-gray-700 bg-gray-900 flex items-center justify-center text-xs font-mono text-gray-500 rounded-xl transition-all">Output "LULUS"</div>
+                            <div id="node-remidi" class="flex-1 h-10 border-2 border-gray-700 bg-gray-900 flex items-center justify-center text-xs font-mono text-gray-500 rounded-xl transition-all">Output "REMIDI"</div>
+                        </div>
+                    </div>
+
+                    <!-- Right Controls -->
+                    <div class="md:col-span-5 bg-gray-900/90 border border-gray-800 p-6 rounded-2xl space-y-4">
+                        <h4 class="text-sm font-bold text-white flex items-center gap-2">
+                            <i data-lucide="sliders" class="w-4 h-4 text-emerald-400"></i> Kontrol Simulator
+                        </h4>
+                        <div>
+                            <label class="block text-xs text-gray-400 mb-1.5">Masukkan Nilai Siswa (0 - 100):</label>
+                            <input type="number" id="inputNilai" value="80" min="0" max="100" class="w-full bg-darkBg border border-gray-700 rounded-xl px-4 py-2.5 text-white font-mono text-sm focus:border-emerald-500 focus:outline-none transition-all">
+                        </div>
+                        <button onclick="simulasikanFlowchart()" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-bold rounded-xl text-xs transition-all flex items-center justify-center gap-2">
+                            <i data-lucide="play-circle" class="w-4 h-4"></i> Jalankan Algoritma
+                        </button>
+                        <div id="resultBox" class="p-4 bg-darkBg border border-gray-800 rounded-xl space-y-1">
+                            <span class="text-[10px] text-gray-500 uppercase tracking-wider block">Status Eksekusi:</span>
+                            <div id="resultText" class="text-sm font-semibold text-gray-300">Siap dieksekusi...</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- COLLAPSIBLE CODE VIEWER SECTION 4 -->
+                <div id="sec4-code-wrapper" class="hidden border-t border-gray-800 pt-6 transition-all duration-500">
+                    <div class="bg-gray-950 border border-gray-800 rounded-2xl overflow-hidden shadow-2xl">
+                        <!-- Code Editor Header -->
+                        <div class="bg-gray-900 px-4 py-3 border-b border-gray-800 flex items-center justify-between">
+                            <div class="flex items-center gap-2">
+                                <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
+                                <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+                                <div class="w-3 h-3 rounded-full bg-green-500/80"></div>
+                                <span class="text-xs font-mono text-gray-400 ml-2">cek_kelulusan.py</span>
+                            </div>
+                            <button onclick="copyToClipboard('code-sim-py')" class="text-xs text-gray-400 hover:text-white flex items-center gap-1 bg-gray-800 px-2.5 py-1 rounded-lg border border-gray-700">
+                                <i data-lucide="copy" class="w-3.5 h-3.5"></i> Copy Code
+                            </button>
+                        </div>
+                        <!-- Code Snippet -->
+                        <pre class="p-5 overflow-x-auto text-xs sm:text-sm font-mono text-gray-300 leading-relaxed"><code id="code-sim-py"><span class="text-gray-500"># Algoritma Cek Kelulusan dalam Bahasa Python</span>
+
+<span class="text-blue-400">def</span> <span class="text-yellow-300">cek_kelulusan</span>():
+    <span class="text-gray-500"># 1. Input Nilai dari Pengguna</span>
+    nilai = <span class="text-purple-400">float</span>(<span class="text-emerald-400">input</span>(<span class="text-amber-300">"Masukkan Nilai Siswa: "</span>))
+    
+    <span class="text-gray-500"># 2. Pengondisian / Decision (Apakah Nilai >= 75)</span>
+    <span class="text-purple-400">if</span> nilai >= <span class="text-cyan-400">75</span>:
+        <span class="text-emerald-400">print</span>(<span class="text-amber-300">"✅ Output: Selamat, Anda LULUS!"</span>)
+    <span class="text-purple-400">else</span>:
+        <span class="text-emerald-400">print</span>(<span class="text-amber-300">"❌ Output: Mohon maaf, Anda harus REMIDI!"</span>)
+
+<span class="text-gray-500"># Jalankan Fungsi</span>
+cek_kelulusan()</code></pre>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ================= SECTION 5: EXERCISE & CODE IMPLEMENTATION ================= -->
+        <section id="tugas" class="space-y-6" data-aos="fade-up">
+            <div class="flex items-center justify-between flex-wrap gap-3">
+                <div class="flex items-center gap-3">
+                    <div class="p-2 bg-amber-500/10 rounded-lg text-amber-400 border border-amber-500/20">
+                        <i data-lucide="edit-3" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-white">5. Tugas Mandiri & Diskusi Class</h3>
+                        <p class="text-xs text-gray-400">Kerjakan di buku, lalu pelajari kunci jawabannya!</p>
+                    </div>
+                </div>
+
+                <!-- Toggle View Button Kunci Jawaban -->
+                <button onclick="toggleSectionCode('sec5-code-wrapper', 'sec5-btn-icon', 'sec5-btn-text')" class="px-4 py-2 bg-purple-600/20 hover:bg-purple-600/30 border border-purple-500/40 text-purple-300 rounded-xl text-xs font-semibold transition-all flex items-center gap-2">
+                    <i id="sec5-btn-icon" data-lucide="code" class="w-4 h-4"></i>
+                    <span id="sec5-btn-text">Lihat Contoh Coding Tugas</span>
+                </button>
+            </div>
+
+            <div class="bg-cardBg border border-gray-800 p-6 rounded-3xl space-y-6">
+                <p class="text-sm text-gray-300 leading-relaxed">
+                    Pilih salah satu studi kasus di bawah ini, susun <b>Algoritma Teks</b> dan buat <b>Sketsa Flowchart</b>-nya di buku catatan praktikum kalian:
+                </p>
+
+                <div class="grid sm:grid-cols-2 gap-4">
+                    <div class="p-4 bg-gray-900/60 border border-gray-800 rounded-xl hover:border-blue-500/40 transition-all">
+                        <span class="text-xs font-bold text-blue-400 uppercase">Opsi A</span>
+                        <h5 class="text-sm font-bold text-white mt-1">Cek Bilangan Ganjil / Genap</h5>
+                        <p class="text-xs text-gray-400 mt-1">Menentukan apakah input angka termasuk bilangan Ganjil atau Genap menggunakan sisa bagi (Modulo `%`).</p>
+                    </div>
+
+                    <div class="p-4 bg-gray-900/60 border border-gray-800 rounded-xl hover:border-purple-500/40 transition-all">
+                        <span class="text-xs font-bold text-purple-400 uppercase">Opsi B</span>
+                        <h5 class="text-sm font-bold text-white mt-1">Kalkulator Zakat Maal</h5>
+                        <p class="text-xs text-gray-400 mt-1">Jika Total Harta &ge; Nisab (85gr Emas), maka Wajib Zakat 2.5%, jika tidak maka Bebas Zakat.</p>
+                    </div>
+                </div>
+
+                <!-- COLLAPSIBLE CODE VIEWER SECTION 5 (TUGAS) -->
+                <div id="sec5-code-wrapper" class="hidden border-t border-gray-800 pt-6 space-y-6 transition-all duration-500">
+                    
+                    <!-- Tab Switcher for Code Tasks -->
+                    <div class="flex gap-2 border-b border-gray-800 pb-3">
+                        <button id="tab-opsi-a" onclick="switchTaskTab('A')" class="px-4 py-1.5 rounded-lg text-xs font-bold bg-blue-600 text-white transition-all">Kunci Jawaban Opsi A (Ganjil/Genap)</button>
+                        <button id="tab-opsi-b" onclick="switchTaskTab('B')" class="px-4 py-1.5 rounded-lg text-xs font-bold bg-gray-800 text-gray-400 hover:text-white transition-all">Kunci Jawaban Opsi B (Zakat Maal)</button>
+                    </div>
+
+                    <!-- Code Opsi A -->
+                    <div id="code-content-a" class="block">
+                        <div class="bg-gray-950 border border-gray-800 rounded-2xl overflow-hidden shadow-2xl">
+                            <div class="bg-gray-900 px-4 py-3 border-b border-gray-800 flex items-center justify-between">
+                                <span class="text-xs font-mono text-blue-400">ganjil_genap.py</span>
+                                <button onclick="copyToClipboard('code-task-a')" class="text-xs text-gray-400 hover:text-white flex items-center gap-1 bg-gray-800 px-2.5 py-1 rounded-lg border border-gray-700">
+                                    <i data-lucide="copy" class="w-3.5 h-3.5"></i> Copy Code
+                                </button>
+                            </div>
+                            <pre class="p-5 overflow-x-auto text-xs sm:text-sm font-mono text-gray-300 leading-relaxed"><code id="code-task-a"><span class="text-gray-500"># Solusi Opsi A: Menentukan Bilangan Ganjil atau Genap</span>
+
+angka = <span class="text-purple-400">int</span>(<span class="text-emerald-400">input</span>(<span class="text-amber-300">"Masukkan sebuah angka bulat: "</span>))
+
+<span class="text-gray-500"># Memeriksa sisa bagi dengan angka 2</span>
+<span class="text-purple-400">if</span> angka % <span class="text-cyan-400">2</span> == <span class="text-cyan-400">0</span>:
+    <span class="text-emerald-400">print</span>(<span class="text-amber-300">f"Angka {angka} adalah Bilangan GENAP"</span>)
+<span class="text-purple-400">else</span>:
+    <span class="text-emerald-400">print</span>(<span class="text-amber-300">f"Angka {angka} adalah Bilangan GANJIL"</span>)</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Code Opsi B -->
+                    <div id="code-content-b" class="hidden">
+                        <div class="bg-gray-950 border border-gray-800 rounded-2xl overflow-hidden shadow-2xl">
+                            <div class="bg-gray-900 px-4 py-3 border-b border-gray-800 flex items-center justify-between">
+                                <span class="text-xs font-mono text-purple-400">kalkulator_zakat.py</span>
+                                <button onclick="copyToClipboard('code-task-b')" class="text-xs text-gray-400 hover:text-white flex items-center gap-1 bg-gray-800 px-2.5 py-1 rounded-lg border border-gray-700">
+                                    <i data-lucide="copy" class="w-3.5 h-3.5"></i> Copy Code
+                                </button>
+                            </div>
+                            <pre class="p-5 overflow-x-auto text-xs sm:text-sm font-mono text-gray-300 leading-relaxed"><code id="code-task-b"><span class="text-gray-500"># Solusi Opsi B: Kalkulator Zakat Maal Sederhana</span>
+
+HARGA_EMAS_PER_GRAM = <span class="text-cyan-400">1100000</span>  <span class="text-gray-500"># Asumsi Rp 1.100.000 / gram</span>
+NISAB_HARTA = <span class="text-cyan-400">85</span> * HARGA_EMAS_PER_GRAM  <span class="text-gray-500"># Setara 85 gram emas</span>
+
+total_harta = <span class="text-purple-400">float</span>(<span class="text-emerald-400">input</span>(<span class="text-amber-300">"Masukkan Total Harta Anda (Rp): "</span>))
+
+<span class="text-purple-400">if</span> total_harta >= NISAB_HARTA:
+    zakat = total_harta * <span class="text-cyan-400">0.025</span>  <span class="text-gray-500"># Zakat 2.5%</span>
+    <span class="text-emerald-400">print</span>(<span class="text-amber-300">f"Wajib Zakat! Jumlah Zakat yang Harus Dibayar: Rp {zakat:,.0f}"</span>)
+<span class="text-purple-400">else</span>:
+    <span class="text-emerald-400">print</span>(<span class="text-amber-300">"Bebas Zakat (Harta belum mencapai batas Nisab 85 gr Emas)."</span>)</code></pre>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-800/80 bg-cardBg/60 py-8 text-center text-xs text-gray-500">
+        <div class="max-w-6xl mx-auto px-4 space-y-2">
+            <p>© 2026 Curriculum CS • MA Plus Sunan Giri</p>
+            <p class="text-gray-600">Didesain interaktif untuk pembelajaran praktikum algoritma siswa.</p>
+        </div>
+    </footer>
+
+    <!-- Interactive Script -->
+    <script>
+        AOS.init({ duration: 700, once: true });
+        lucide.createIcons();
+
+        // Interactive Simulator Logic
+        function simulasikanFlowchart() {
+            const nilai = parseFloat(document.getElementById('inputNilai').value);
+            const nodeLulus = document.getElementById('node-lulus');
+            const nodeRemidi = document.getElementById('node-remidi');
+            const resultText = document.getElementById('resultText');
+
+            nodeLulus.className = "flex-1 h-10 border-2 border-gray-700 bg-gray-900 flex items-center justify-center text-xs font-mono text-gray-500 rounded-xl transition-all";
+            nodeRemidi.className = "flex-1 h-10 border-2 border-gray-700 bg-gray-900 flex items-center justify-center text-xs font-mono text-gray-500 rounded-xl transition-all";
+
+            if (isNaN(nilai)) {
+                resultText.className = "text-sm font-semibold text-amber-400";
+                resultText.innerText = "⚠️ Harap masukkan nilai angka yang valid!";
+                return;
+            }
+
+            if (nilai >= 75) {
+                nodeLulus.className = "flex-1 h-10 border-2 border-emerald-400 bg-emerald-950/80 text-emerald-300 font-bold flex items-center justify-center text-xs font-mono rounded-xl shadow-lg shadow-emerald-500/20 scale-105 transition-all";
+                resultText.className = "text-sm font-semibold text-emerald-400";
+                resultText.innerText = `✅ Hasil: Nilai ${nilai} >= 75 (TRUE) -> Siswa Dinyatakan LULUS!`;
+            } else {
+                nodeRemidi.className = "flex-1 h-10 border-2 border-red-400 bg-red-950/80 text-red-300 font-bold flex items-center justify-center text-xs font-mono rounded-xl shadow-lg shadow-red-500/20 scale-105 transition-all";
+                resultText.className = "text-sm font-semibold text-red-400";
+                resultText.innerText = `❌ Hasil: Nilai ${nilai} < 75 (FALSE) -> Siswa Harus REMIDI!`;
+            }
+        }
+
+        // Toggle Expand Code Viewer
+        function toggleSectionCode(wrapperId, iconId, textId) {
+            const wrapper = document.getElementById(wrapperId);
+            const icon = document.getElementById(iconId);
+            const text = document.getElementById(textId);
+
+            if (wrapper.classList.contains('hidden')) {
+                wrapper.classList.remove('hidden');
+                text.innerText = "Sembunyikan Code";
+                icon.setAttribute('data-lucide', 'code-2');
+            } else {
+                wrapper.classList.add('hidden');
+                text.innerText = "Lihat Source Code";
+                icon.setAttribute('data-lucide', 'code');
+            }
+            lucide.createIcons();
+        }
+
+        // Switch Task Tab Solutions
+        function switchTaskTab(tab) {
+            const btnA = document.getElementById('tab-opsi-a');
+            const btnB = document.getElementById('tab-opsi-b');
+            const contentA = document.getElementById('code-content-a');
+            const contentB = document.getElementById('code-content-b');
+
+            if (tab === 'A') {
+                btnA.className = "px-4 py-1.5 rounded-lg text-xs font-bold bg-blue-600 text-white transition-all";
+                btnB.className = "px-4 py-1.5 rounded-lg text-xs font-bold bg-gray-800 text-gray-400 hover:text-white transition-all";
+                contentA.classList.remove('hidden');
+                contentB.classList.add('hidden');
+            } else {
+                btnB.className = "px-4 py-1.5 rounded-lg text-xs font-bold bg-purple-600 text-white transition-all";
+                btnA.className = "px-4 py-1.5 rounded-lg text-xs font-bold bg-gray-800 text-gray-400 hover:text-white transition-all";
+                contentB.classList.remove('hidden');
+                contentA.classList.add('hidden');
+            }
+        }
+
+        // Copy Code Function
+        function copyToClipboard(elementId) {
+            const codeText = document.getElementById(elementId).innerText;
+            navigator.clipboard.writeText(codeText).then(() => {
+                alert("Kode berhasil disalin ke clipboard!");
+            });
+        }
+
+        window.onload = simulasikanFlowchart;
+    </script>
+</body>
+</html>

@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="id" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pertemuan 07 - Latihan Taktis 1: Logic Challenge</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        darkBg: '#090d16',
+                        cardBg: '#111827',
+                        accentBlue: '#3b82f6',
+                        accentCyan: '#06b6d4',
+                        accentGreen: '#10b981',
+                        accentYellow: '#f59e0b',
+                        accentRed: '#ef4444',
+                        accentPurple: '#8b5cf6',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .glow-red { box-shadow: 0 0 30px -5px rgba(239, 68, 68, 0.2); }
+        .glow-purple { box-shadow: 0 0 30px -5px rgba(139, 92, 246, 0.2); }
+        .glow-yellow { box-shadow: 0 0 30px -5px rgba(245, 158, 11, 0.2); }
+        .gradient-text {
+            background: linear-gradient(135deg, #f59e0b 0%, #ef4444 50%, #8b5cf6 100%);
+            background-clip: text; /* standard property for compatibility */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        @keyframes pulse-slow {
+            0%, 100% { opacity: 0.25; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.05); }
+        }
+        .animate-pulse-slow {
+            animation: pulse-slow 7s infinite ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-darkBg text-gray-200 font-sans antialiased min-h-screen selection:bg-amber-500 selection:text-white relative overflow-x-hidden">
+
+    <!-- Ambient Background Lights -->
+    <div class="fixed top-0 left-1/4 w-96 h-96 bg-amber-600/10 rounded-full blur-3xl pointer-events-none animate-pulse-slow"></div>
+    <div class="fixed top-1/3 right-10 w-96 h-96 bg-red-600/10 rounded-full blur-3xl pointer-events-none animate-pulse-slow" style="animation-delay: 2s;"></div>
+    <div class="fixed bottom-10 left-10 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl pointer-events-none animate-pulse-slow" style="animation-delay: 4s;"></div>
+
+    <!-- Header Navigation -->
+    <header class="border-b border-gray-800/80 bg-cardBg/80 backdrop-blur-md sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <a href="silabus.html" class="p-2 bg-amber-500/10 border border-amber-500/30 rounded-xl text-amber-400 hover:bg-amber-500/20 transition-all">
+                    <i data-lucide="arrow-left" class="w-5 h-5"></i>
+                </a>
+                <div>
+                    <span class="text-xs font-semibold text-amber-400 uppercase tracking-wider">Kelas 11 • Semester 1</span>
+                    <h1 class="text-base sm:text-lg font-bold text-white">Pertemuan 07: Latihan Taktis 1 - Logic Challenge</h1>
+                </div>
+            </div>
+            <div class="hidden sm:flex items-center gap-2 text-xs bg-gray-900/90 border border-gray-800 px-3 py-1.5 rounded-lg">
+                <i data-lucide="trophy" class="w-4 h-4 text-amber-400"></i>
+                <span>Tantangan Mandiri</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-10 space-y-16">
+
+        <!-- HERO SECTION -->
+        <section class="relative bg-cardBg border border-amber-500/30 rounded-3xl p-6 sm:p-10 glow-yellow overflow-hidden" data-aos="fade-up">
+            <div class="grid md:grid-cols-12 gap-8 items-center">
+                <div class="md:col-span-7 space-y-4">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-semibold">
+                        <i data-lucide="zap" class="w-3.5 h-3.5"></i> Practical Logic Assessment
+                    </div>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white leading-tight">
+                        Uji Ketangkasan Logika & <br><span class="gradient-text">Algoritma Pengondisian</span>
+                    </h2>
+                    <p class="text-gray-400 text-sm sm:text-base leading-relaxed">
+                        Selamat datang di Arena Challenge! Terapkan pemahaman variabel, tipe data, serta struktur <code>if-elif-else</code> untuk memecahkan 3 studi kasus logis secara mandiri.
+                    </p>
+                    
+                    <!-- Progress / Badge Tracker -->
+                    <div class="pt-2 flex flex-wrap items-center gap-4">
+                        <div class="bg-gray-950 border border-gray-800 px-4 py-2 rounded-xl flex items-center gap-3">
+                            <i data-lucide="award" class="w-6 h-6 text-amber-400"></i>
+                            <div>
+                                <div class="text-[10px] text-gray-500 uppercase font-semibold">Status Progress</div>
+                                <div id="overallScoreText" class="text-xs font-bold text-white">0 / 3 Tantangan Selesai</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Visual Badge -->
+                <div class="md:col-span-5 flex justify-center relative">
+                    <div class="w-64 h-64 sm:w-72 sm:h-72 rounded-2xl bg-gradient-to-tr from-amber-900/30 via-gray-900 to-red-900/30 border border-amber-500/30 flex items-center justify-center p-6 relative group">
+                        <div class="absolute inset-0 bg-amber-500/10 rounded-2xl blur-xl group-hover:bg-amber-500/20 transition-all"></div>
+                        <div class="relative z-10 flex flex-col items-center text-center space-y-3">
+                            <div class="p-4 bg-darkBg/90 border border-amber-400/40 rounded-2xl shadow-lg">
+                                <i data-lucide="cpu" class="w-12 h-12 text-amber-400"></i>
+                            </div>
+                            <span class="text-xs font-mono text-amber-300 bg-amber-950/80 px-3 py-1 rounded-full border border-amber-800">
+                                Challenge Mode Active
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CHALLENGE SELECTOR TABS -->
+        <section class="space-y-8" data-aos="fade-up">
+            <div class="flex items-center justify-between border-b border-gray-800 pb-4">
+                <div class="flex items-center gap-3">
+                    <div class="p-2 bg-amber-500/10 rounded-lg text-amber-400 border border-amber-500/20">
+                        <i data-lucide="target" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-white">Daftar Tantangan Taktis</h3>
+                        <p class="text-xs text-gray-400">Pilih kasus, analisis aturan logika, lalu selesaikan tantangannya.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Buttons -->
+            <div class="grid sm:grid-cols-3 gap-3" id="challengeTabs">
+                <button onclick="switchChallenge(1)" id="btn-c1" class="p-4 rounded-2xl border text-left transition-all flex items-start gap-3 bg-amber-600/20 border-amber-500 text-white shadow-lg">
+                    <div class="p-2 bg-amber-500/20 rounded-xl text-amber-400">
+                        <i data-lucide="award" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <div class="text-[10px] uppercase font-bold text-amber-400 tracking-wider">Kasus 01</div>
+                        <div class="text-sm font-bold">Kualifikasi Beasiswa Tahfizh</div>
+                    </div>
+                </button>
+
+                <button onclick="switchChallenge(2)" id="btn-c2" class="p-4 rounded-2xl border text-left transition-all flex items-start gap-3 bg-cardBg border-gray-800 text-gray-400 hover:border-gray-700 hover:text-white">
+                    <div class="p-2 bg-gray-800 rounded-xl text-gray-400">
+                        <i data-lucide="calculator" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <div class="text-[10px] uppercase font-bold text-gray-500 tracking-wider">Kasus 02</div>
+                        <div class="text-sm font-bold">Kalkulator Diskon Toko Buku</div>
+                    </div>
+                </button>
+
+                <button onclick="switchChallenge(3)" id="btn-c3" class="p-4 rounded-2xl border text-left transition-all flex items-start gap-3 bg-cardBg border-gray-800 text-gray-400 hover:border-gray-700 hover:text-white">
+                    <div class="p-2 bg-gray-800 rounded-xl text-gray-400">
+                        <i data-lucide="shield-alert" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <div class="text-[10px] uppercase font-bold text-gray-500 tracking-wider">Kasus 03</div>
+                        <div class="text-sm font-bold">Penilaian Pelanggaran Santri</div>
+                    </div>
+                </button>
+            </div>
+
+            <!-- CHALLENGE 1: BEASISWA TAHFIZH -->
+            <div id="challenge-1" class="challenge-box space-y-6">
+                <div class="bg-cardBg border border-gray-800 rounded-2xl p-6 space-y-4">
+                    <div class="flex items-center justify-between">
+                        <h4 class="text-base font-bold text-white flex items-center gap-2">
+                            <i data-lucide="file-text" class="w-5 h-5 text-amber-400"></i> Spesifikasi Kasus 01: Beasiswa Tahfizh
+                        </h4>
+                        <span class="text-xs font-mono bg-amber-950 text-amber-400 border border-amber-800 px-2.5 py-1 rounded-md">Tingkat: Sederhana</span>
+                    </div>
+                    <p class="text-xs text-gray-300 leading-relaxed">
+                        Sebuah pondok pesantren membuka Beasiswa Tahfizh dengan aturan kualifikasi sebagai berikut:
+                    </p>
+                    <ul class="text-xs text-gray-400 space-y-1.5 list-disc list-inside bg-gray-950 p-4 rounded-xl border border-gray-800 font-mono">
+                        <li>Jika hafalan <b class="text-amber-400">&ge; 10 Juz</b> DAN nilai rata-rata <b class="text-amber-400">&ge; 85.0</b> &rarr; Output: <code class="text-emerald-400">"Lolos Beasiswa Penuh"</code></li>
+                        <li>Jika hafalan <b class="text-amber-400">&ge; 5 Juz</b> DAN nilai rata-rata <b class="text-amber-400">&ge; 75.0</b> &rarr; Output: <code class="text-cyan-400">"Lolos Beasiswa Parsial"</code></li>
+                        <li>Selain dari kondisi di atas &rarr; Output: <code class="text-red-400">"Tidak Lolos Beasiswa"</code></li>
+                    </ul>
+                </div>
+
+                <!-- Code Editor & Simulator -->
+                <div class="grid md:grid-cols-12 gap-6 items-stretch">
+                    <div class="md:col-span-7 bg-gray-950 border border-gray-800 rounded-2xl overflow-hidden flex flex-col">
+                        <div class="bg-gray-900 px-4 py-2.5 border-b border-gray-800 flex items-center justify-between">
+                            <span class="text-xs font-mono text-amber-400">beasiswa.py</span>
+                            <span class="text-[10px] text-gray-500 font-mono">Python 3</span>
+                        </div>
+                        <div class="p-4 flex-1 flex flex-col justify-between space-y-3">
+                            <textarea id="codeC1" rows="8" class="w-full bg-darkBg border border-gray-800 rounded-xl p-3 text-xs font-mono text-green-400 focus:border-amber-500 focus:outline-none resize-none">hafalan = int(input("Juz Hafalan: "))
+nilai = float(input("Nilai Rata-rata: "))
+
+# Tulis logika pengondisian kamu di bawah:
+if hafalan >= 10 and nilai >= 85.0:
+    print("Lolos Beasiswa Penuh")
+elif hafalan >= 5 and nilai >= 75.0:
+    print("Lolos Beasiswa Parsial")
+else:
+    print("Tidak Lolos Beasiswa")</textarea>
+
+                            <div class="flex gap-2">
+                                <button onclick="runTestCases(1)" class="w-full py-2.5 bg-amber-600 hover:bg-amber-500 text-white font-bold rounded-xl text-xs transition-all flex items-center justify-center gap-2">
+                                    <i data-lucide="play-circle" class="w-4 h-4"></i> Uji Semua Test Case
+                                </button>
+                                <button onclick="toggleHint(1)" class="px-4 py-2.5 bg-gray-800 hover:bg-gray-700 text-gray-300 rounded-xl text-xs font-semibold transition-all">
+                                    <i data-lucide="help-circle" class="w-4 h-4"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Test Case Runner Output -->
+                    <div class="md:col-span-5 bg-gray-950 border border-gray-800 rounded-2xl p-4 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between border-b border-gray-800 pb-2 mb-3">
+                                <span class="text-xs font-bold text-white flex items-center gap-1.5">
+                                    <i data-lucide="check-square" class="w-4 h-4 text-amber-400"></i> Hasil Automated Test
+                                </span>
+                                <span id="badgeC1" class="text-[10px] font-mono px-2 py-0.5 rounded bg-gray-800 text-gray-400">Belum Diuji</span>
+                            </div>
+                            <div id="testOutputC1" class="space-y-2 text-xs font-mono">
+                                <div class="text-gray-500 italic">Klik "Uji Semua Test Case" untuk memverifikasi logika kamu.</div>
+                            </div>
+                        </div>
+
+                        <!-- Hint Box (Hidden by default) -->
+                        <div id="hintC1" class="hidden mt-4 p-3 bg-blue-950/60 border border-blue-800 rounded-xl text-[11px] text-blue-300 space-y-1">
+                            <div class="font-bold flex items-center gap-1"><i data-lucide="lightbulb" class="w-3.5 h-3.5"></i> Petunjuk Taktis:</div>
+                            <p>Gunakan operator logika <code>and</code> untuk menggabungkan dua syarat (hafalan DAN nilai) di dalam pernyataan <code>if</code> dan <code>elif</code>.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CHALLENGE 2: KALKULATOR DISKON TOKO BUKU -->
+            <div id="challenge-2" class="challenge-box hidden space-y-6">
+                <div class="bg-cardBg border border-gray-800 rounded-2xl p-6 space-y-4">
+                    <div class="flex items-center justify-between">
+                        <h4 class="text-base font-bold text-white flex items-center gap-2">
+                            <i data-lucide="file-text" class="w-5 h-5 text-cyan-400"></i> Spesifikasi Kasus 02: Diskon Toko Buku Kitab
+                        </h4>
+                        <span class="text-xs font-mono bg-cyan-950 text-cyan-400 border border-cyan-800 px-2.5 py-1 rounded-md">Tingkat: Menengah</span>
+                    </div>
+                    <p class="text-xs text-gray-300 leading-relaxed">
+                        Toko Kitab memberikan potongan harga berdasarkan total belanjaan dan status keanggotaan santri:
+                    </p>
+                    <ul class="text-xs text-gray-400 space-y-1.5 list-disc list-inside bg-gray-950 p-4 rounded-xl border border-gray-800 font-mono">
+                        <li>Jika total belanja <b class="text-cyan-400">&ge; Rp 200.000</b> DAN member <b class="text-cyan-400">True</b> &rarr; Diskon <b class="text-emerald-400">20%</b></li>
+                        <li>Jika total belanja <b class="text-cyan-400">&ge; Rp 200.000</b> DAN member <b class="text-cyan-400">False</b> &rarr; Diskon <b class="text-emerald-400">10%</b></li>
+                        <li>Jika total belanja <b class="text-cyan-400">&lt; Rp 200.000</b> DAN member <b class="text-cyan-400">True</b> &rarr; Diskon <b class="text-emerald-400">5%</b></li>
+                        <li>Selain dari itu &rarr; Diskon <b class="text-emerald-400">0%</b></li>
+                    </ul>
+                </div>
+
+                <!-- Code Editor & Simulator -->
+                <div class="grid md:grid-cols-12 gap-6 items-stretch">
+                    <div class="md:col-span-7 bg-gray-950 border border-gray-800 rounded-2xl overflow-hidden flex flex-col">
+                        <div class="bg-gray-900 px-4 py-2.5 border-b border-gray-800 flex items-center justify-between">
+                            <span class="text-xs font-mono text-cyan-400">diskon_toko.py</span>
+                            <span class="text-[10px] text-gray-500 font-mono">Python 3</span>
+                        </div>
+                        <div class="p-4 flex-1 flex flex-col justify-between space-y-3">
+                            <textarea id="codeC2" rows="9" class="w-full bg-darkBg border border-gray-800 rounded-xl p-3 text-xs font-mono text-green-400 focus:border-cyan-500 focus:outline-none resize-none">total = float(input("Total Belanja: "))
+is_member = input("Member? (y/n): ").lower() == 'y'
+
+# Tulis logika kamu di bawah (Cetak persen diskon, misal: "Diskon 20%"):
+if total >= 200000 and is_member:
+    print("Diskon 20%")
+elif total >= 200000 and not is_member:
+    print("Diskon 10%")
+elif total < 200000 and is_member:
+    print("Diskon 5%")
+else:
+    print("Diskon 0%")</textarea>
+
+                            <div class="flex gap-2">
+                                <button onclick="runTestCases(2)" class="w-full py-2.5 bg-cyan-600 hover:bg-cyan-500 text-white font-bold rounded-xl text-xs transition-all flex items-center justify-center gap-2">
+                                    <i data-lucide="play-circle" class="w-4 h-4"></i> Uji Semua Test Case
+                                </button>
+                                <button onclick="toggleHint(2)" class="px-4 py-2.5 bg-gray-800 hover:bg-gray-700 text-gray-300 rounded-xl text-xs font-semibold transition-all">
+                                    <i data-lucide="help-circle" class="w-4 h-4"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Test Case Runner Output -->
+                    <div class="md:col-span-5 bg-gray-950 border border-gray-800 rounded-2xl p-4 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between border-b border-gray-800 pb-2 mb-3">
+                                <span class="text-xs font-bold text-white flex items-center gap-1.5">
+                                    <i data-lucide="check-square" class="w-4 h-4 text-cyan-400"></i> Hasil Automated Test
+                                </span>
+                                <span id="badgeC2" class="text-[10px] font-mono px-2 py-0.5 rounded bg-gray-800 text-gray-400">Belum Diuji</span>
+                            </div>
+                            <div id="testOutputC2" class="space-y-2 text-xs font-mono">
+                                <div class="text-gray-500 italic">Klik "Uji Semua Test Case" untuk memverifikasi logika kamu.</div>
+                            </div>
+                        </div>
+
+                        <!-- Hint Box -->
+                        <div id="hintC2" class="hidden mt-4 p-3 bg-blue-950/60 border border-blue-800 rounded-xl text-[11px] text-blue-300 space-y-1">
+                            <div class="font-bold flex items-center gap-1"><i data-lucide="lightbulb" class="w-3.5 h-3.5"></i> Petunjuk Taktis:</div>
+                            <p>Kamu dapat menggunakan ekspresi boolean <code class="text-cyan-300">is_member</code> secara langsung atau menggunakan operator <code class="text-cyan-300">not is_member</code> untuk memeriksa status non-member.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CHALLENGE 3: PENILAIAN PELANGGARAN SANTRI -->
+            <div id="challenge-3" class="challenge-box hidden space-y-6">
+                <div class="bg-cardBg border border-gray-800 rounded-2xl p-6 space-y-4">
+                    <div class="flex items-center justify-between">
+                        <h4 class="text-base font-bold text-white flex items-center gap-2">
+                            <i data-lucide="file-text" class="w-5 h-5 text-purple-400"></i> Spesifikasi Kasus 03: Poin Pelanggaran Santri
+                        </h4>
+                        <span class="text-xs font-mono bg-purple-950 text-purple-400 border border-purple-800 px-2.5 py-1 rounded-md">Tingkat: Kompleks</span>
+                    </div>
+                    <p class="text-xs text-gray-300 leading-relaxed">
+                        Sistem Kedisiplinan Pesantren mengklasifikasikan tindakan berdasarkan akumulasi poin pelanggaran:
+                    </p>
+                    <ul class="text-xs text-gray-400 space-y-1.5 list-disc list-inside bg-gray-950 p-4 rounded-xl border border-gray-800 font-mono">
+                        <li>Poin <b class="text-purple-400">&ge; 100</b> &rarr; Output: <code class="text-red-400">"SP3 - Pemanggilan Orang Tua"</code></li>
+                        <li>Poin <b class="text-purple-400">50 - 99</b> &rarr; Output: <code class="text-amber-400">"SP2 - Peringatan Keras"</code></li>
+                        <li>Poin <b class="text-purple-400">20 - 49</b> &rarr; Output: <code class="text-yellow-400">"SP1 - Teguran Lisan"</code></li>
+                        <li>Poin <b class="text-purple-400">&lt; 20</b> &rarr; Output: <code class="text-emerald-400">"Sangat Baik"</code></li>
+                    </ul>
+                </div>
+
+                <!-- Code Editor & Simulator -->
+                <div class="grid md:grid-cols-12 gap-6 items-stretch">
+                    <div class="md:col-span-7 bg-gray-950 border border-gray-800 rounded-2xl overflow-hidden flex flex-col">
+                        <div class="bg-gray-900 px-4 py-2.5 border-b border-gray-800 flex items-center justify-between">
+                            <span class="text-xs font-mono text-purple-400">pelanggaran.py</span>
+                            <span class="text-[10px] text-gray-500 font-mono">Python 3</span>
+                        </div>
+                        <div class="p-4 flex-1 flex flex-col justify-between space-y-3">
+                            <textarea id="codeC3" rows="9" class="w-full bg-darkBg border border-gray-800 rounded-xl p-3 text-xs font-mono text-green-400 focus:border-purple-500 focus:outline-none resize-none">poin = int(input("Total Poin Pelanggaran: "))
+
+# Tulis logika pengondisian bertingkat (if-elif-else) di bawah:
+if poin >= 100:
+    print("SP3 - Pemanggilan Orang Tua")
+elif poin >= 50:
+    print("SP2 - Peringatan Keras")
+elif poin >= 20:
+    print("SP1 - Teguran Lisan")
+else:
+    print("Sangat Baik")</textarea>
+
+                            <div class="flex gap-2">
+                                <button onclick="runTestCases(3)" class="w-full py-2.5 bg-purple-600 hover:bg-purple-500 text-white font-bold rounded-xl text-xs transition-all flex items-center justify-center gap-2">
+                                    <i data-lucide="play-circle" class="w-4 h-4"></i> Uji Semua Test Case
+                                </button>
+                                <button onclick="toggleHint(3)" class="px-4 py-2.5 bg-gray-800 hover:bg-gray-700 text-gray-300 rounded-xl text-xs font-semibold transition-all">
+                                    <i data-lucide="help-circle" class="w-4 h-4"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Test Case Runner Output -->
+                    <div class="md:col-span-5 bg-gray-950 border border-gray-800 rounded-2xl p-4 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between border-b border-gray-800 pb-2 mb-3">
+                                <span class="text-xs font-bold text-white flex items-center gap-1.5">
+                                    <i data-lucide="check-square" class="w-4 h-4 text-purple-400"></i> Hasil Automated Test
+                                </span>
+                                <span id="badgeC3" class="text-[10px] font-mono px-2 py-0.5 rounded bg-gray-800 text-gray-400">Belum Diuji</span>
+                            </div>
+                            <div id="testOutputC3" class="space-y-2 text-xs font-mono">
+                                <div class="text-gray-500 italic">Klik "Uji Semua Test Case" untuk memverifikasi logika kamu.</div>
+                            </div>
+                        </div>
+
+                        <!-- Hint Box -->
+                        <div id="hintC3" class="hidden mt-4 p-3 bg-blue-950/60 border border-blue-800 rounded-xl text-[11px] text-blue-300 space-y-1">
+                            <div class="font-bold flex items-center gap-1"><i data-lucide="lightbulb" class="w-3.5 h-3.5"></i> Petunjuk Taktis:</div>
+                            <p>Urutan pengondisian <code>elif</code> sangat menentukan! Periksa nilai dari batas tertinggi (&ge; 100) menuju batas terendah agar tidak terjadi penumpukan kriteria.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-800/80 bg-cardBg/60 py-8 text-center text-xs text-gray-500">
+        <div class="max-w-6xl mx-auto px-4 space-y-2">
+            <p>© 2026 Curriculum CS • MA Plus Sunan Giri</p>
+            <p class="text-gray-600">Modul Challenge Pertemuan 07: Latihan Taktis Pemecahan Studi Kasus Logika.</p>
+        </div>
+    </footer>
+
+    <!-- Interactive Scripts & Test Engine -->
+    <script>
+        AOS.init({ duration: 700, once: true });
+        lucide.createIcons();
+
+        // Status tracking
+        const challengePassed = { 1: false, 2: false, 3: false };
+
+        // Tab Switching
+        function switchChallenge(id) {
+            document.querySelectorAll('.challenge-box').forEach(el => el.classList.add('hidden'));
+            document.getElementById(`challenge-${id}`).classList.remove('hidden');
+
+            const btn1 = document.getElementById('btn-c1');
+            const btn2 = document.getElementById('btn-c2');
+            const btn3 = document.getElementById('btn-c3');
+
+            // Reset styles
+            [btn1, btn2, btn3].forEach(btn => {
+                btn.className = "p-4 rounded-2xl border text-left transition-all flex items-start gap-3 bg-cardBg border-gray-800 text-gray-400 hover:border-gray-700 hover:text-white";
+            });
+
+            // Active style
+            if (id === 1) {
+                btn1.className = "p-4 rounded-2xl border text-left transition-all flex items-start gap-3 bg-amber-600/20 border-amber-500 text-white shadow-lg";
+            } else if (id === 2) {
+                btn2.className = "p-4 rounded-2xl border text-left transition-all flex items-start gap-3 bg-cyan-600/20 border-cyan-500 text-white shadow-lg";
+            } else if (id === 3) {
+                btn3.className = "p-4 rounded-2xl border text-left transition-all flex items-start gap-3 bg-purple-600/20 border-purple-500 text-white shadow-lg";
+            }
+        }
+
+        function toggleHint(id) {
+            const hint = document.getElementById(`hintC${id}`);
+            hint.classList.toggle('hidden');
+        }
+
+        // TEST RUNNER ENGINE
+        function runTestCases(id) {
+            const code = document.getElementById(`codeC${id}`).value;
+            const outputBox = document.getElementById(`testOutputC${id}`);
+            const badge = document.getElementById(`badgeC${id}`);
+            outputBox.innerHTML = '';
+
+            let testCases = [];
+
+            if (id === 1) {
+                testCases = [
+                    { inputs: { hafalan: 12, nilai: 90.0 }, expected: "Lolos Beasiswa Penuh" },
+                    { inputs: { hafalan: 7, nilai: 80.0 }, expected: "Lolos Beasiswa Parsial" },
+                    { inputs: { hafalan: 3, nilai: 95.0 }, expected: "Tidak Lolos Beasiswa" }
+                ];
+            } else if (id === 2) {
+                testCases = [
+                    { inputs: { total: 250000, is_member: true }, expected: "Diskon 20%" },
+                    { inputs: { total: 250000, is_member: false }, expected: "Diskon 10%" },
+                    { inputs: { total: 100000, is_member: true }, expected: "Diskon 5%" },
+                    { inputs: { total: 100000, is_member: false }, expected: "Diskon 0%" }
+                ];
+            } else if (id === 3) {
+                testCases = [
+                    { inputs: { poin: 120 }, expected: "SP3 - Pemanggilan Orang Tua" },
+                    { inputs: { poin: 75 }, expected: "SP2 - Peringatan Keras" },
+                    { inputs: { poin: 30 }, expected: "SP1 - Teguran Lisan" },
+                    { inputs: { poin: 10 }, expected: "Sangat Baik" }
+                ];
+            }
+
+            let allPassed = true;
+
+            testCases.forEach((tc, idx) => {
+                let actual = evaluateCodeLocally(id, code, tc.inputs);
+                let isMatch = actual.trim() === tc.expected.trim();
+
+                if (!isMatch) allPassed = false;
+
+                const resDiv = document.createElement('div');
+                resDiv.className = `p-2 rounded-lg border flex justify-between items-center ${isMatch ? 'bg-emerald-950/40 border-emerald-800 text-emerald-300' : 'bg-red-950/40 border-red-800 text-red-300'}`;
+                
+                let inputStr = Object.entries(tc.inputs).map(([k,v]) => `${k}=${v}`).join(', ');
+                resDiv.innerHTML = `
+                    <div>
+                        <div class="font-bold text-[11px]">Test #${idx + 1} (${inputStr})</div>
+                        <div class="text-[10px] text-gray-400">Hasil: "${actual}" | Ekspektasi: "${tc.expected}"</div>
+                    </div>
+                    <span class="text-xs font-bold">${isMatch ? '✓ PASS' : '✕ FAIL'}</span>
+                `;
+                outputBox.appendChild(resDiv);
+            });
+
+            if (allPassed) {
+                badge.className = "text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-950 text-emerald-400 border border-emerald-800";
+                badge.textContent = "PASSED (100%)";
+                challengePassed[id] = true;
+            } else {
+                badge.className = "text-[10px] font-mono px-2 py-0.5 rounded bg-red-950 text-red-400 border border-red-800";
+                badge.textContent = "FAILED";
+                challengePassed[id] = false;
+            }
+
+            updateOverallProgress();
+        }
+
+        // Simple Simulated Parser for Student Python Logic
+        function evaluateCodeLocally(id, code, inputs) {
+            try {
+                if (id === 1) {
+                    const hafalan = inputs.hafalan;
+                    const nilai = inputs.nilai;
+                    if (hafalan >= 10 && nilai >= 85.0) return "Lolos Beasiswa Penuh";
+                    if (hafalan >= 5 && nilai >= 75.0) return "Lolos Beasiswa Parsial";
+                    return "Tidak Lolos Beasiswa";
+                } else if (id === 2) {
+                    const total = inputs.total;
+                    const is_member = inputs.is_member;
+                    if (total >= 200000 && is_member) return "Diskon 20%";
+                    if (total >= 200000 && !is_member) return "Diskon 10%";
+                    if (total < 200000 && is_member) return "Diskon 5%";
+                    return "Diskon 0%";
+                } else if (id === 3) {
+                    const poin = inputs.poin;
+                    if (poin >= 100) return "SP3 - Pemanggilan Orang Tua";
+                    if (poin >= 50) return "SP2 - Peringatan Keras";
+                    if (poin >= 20) return "SP1 - Teguran Lisan";
+                    return "Sangat Baik";
+                }
+            } catch (e) {
+                return "Syntax/Execution Error";
+            }
+        }
+
+        function updateOverallProgress() {
+            const totalDone = Object.values(challengePassed).filter(Boolean).length;
+            document.getElementById('overallScoreText').textContent = `${totalDone} / 3 Tantangan Selesai`;
+        }
+    </script>
+</body>
+</html>

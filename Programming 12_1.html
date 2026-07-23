@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="id" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pertemuan 01-03 - UI/UX Design di Figma (Mobile 390x844px)</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        darkBg: '#090d16',
+                        cardBg: '#111827',
+                        accentBlue: '#3b82f6',
+                        accentCyan: '#06b6d4',
+                        accentGreen: '#10b981',
+                        accentYellow: '#f59e0b',
+                        accentRed: '#ef4444',
+                        accentPurple: '#8b5cf6',
+                        accentFigma: '#f24e1e',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .glow-figma { box-shadow: 0 0 35px -5px rgba(242, 78, 30, 0.25); }
+        .glow-purple { box-shadow: 0 0 35px -5px rgba(139, 92, 246, 0.25); }
+        .gradient-figma {
+            background: linear-gradient(135deg, #f24e1e 0%, #a259ff 50%, #1abcfe 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .canvas-grid {
+            background-size: 20px 20px;
+            background-image: radial-gradient(circle, rgba(255,255,255,0.07) 1px, transparent 1px);
+        }
+        @keyframes pulse-slow {
+            0%, 100% { opacity: 0.25; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(1.05); }
+        }
+        .animate-pulse-slow {
+            animation: pulse-slow 8s infinite ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-darkBg text-gray-200 font-sans antialiased min-h-screen selection:bg-orange-500 selection:text-white relative overflow-x-hidden">
+
+    <!-- Ambient Background Lights -->
+    <div class="fixed top-0 left-1/4 w-96 h-96 bg-orange-600/10 rounded-full blur-3xl pointer-events-none animate-pulse-slow"></div>
+    <div class="fixed top-1/3 right-10 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl pointer-events-none animate-pulse-slow" style="animation-delay: 2.5s;"></div>
+    <div class="fixed bottom-10 left-10 w-96 h-96 bg-cyan-600/10 rounded-full blur-3xl pointer-events-none animate-pulse-slow" style="animation-delay: 5s;"></div>
+
+    <!-- Header Navigation -->
+    <header class="border-b border-gray-800/80 bg-cardBg/80 backdrop-blur-md sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <a href="silabus.html" class="p-2 bg-orange-500/10 border border-orange-500/30 rounded-xl text-orange-400 hover:bg-orange-500/20 transition-all">
+                    <i data-lucide="arrow-left" class="w-5 h-5"></i>
+                </a>
+                <div>
+                    <span class="text-xs font-semibold text-orange-400 uppercase tracking-wider">Kelas 12 • Semester 1</span>
+                    <h1 class="text-base sm:text-lg font-bold text-white">Pertemuan 01 - 03: UI/UX Design di Figma</h1>
+                </div>
+            </div>
+            <div class="hidden sm:flex items-center gap-2 text-xs bg-gray-900/90 border border-gray-800 px-3 py-1.5 rounded-lg">
+                <i data-lucide="layout" class="w-4 h-4 text-orange-400"></i>
+                <span>Mobile Frame: 390 × 844 px</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 py-10 space-y-16">
+
+        <!-- HERO SECTION -->
+        <section class="relative bg-cardBg border border-orange-500/30 rounded-3xl p-6 sm:p-10 glow-figma overflow-hidden" data-aos="fade-up">
+            <div class="grid md:grid-cols-12 gap-8 items-center">
+                <div class="md:col-span-7 space-y-4">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/30 text-orange-400 text-xs font-semibold">
+                        <i data-lucide="figma" class="w-3.5 h-3.5"></i> UI/UX Design Fundamentals
+                    </div>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white leading-tight">
+                        Merancang Wireframe & <br><span class="gradient-figma">UI Mobile App Layout</span>
+                    </h2>
+                    <p class="text-gray-400 text-sm sm:text-base leading-relaxed">
+                        Pelajari alur perancangan aplikasi seluler modern berbasis aturan UX (*User Experience*) dan kerapihan UI (*User Interface*). Praktik langsung menggunakan standar Frame **iPhone 13 / 14 (390 × 844 px)** di Figma.
+                    </p>
+                    
+                    <div class="pt-2 flex flex-wrap gap-3 text-xs font-mono text-gray-300">
+                        <span class="px-3 py-1.5 rounded-lg bg-gray-950 border border-gray-800 flex items-center gap-1.5"><i data-lucide="smartphone" class="w-3.5 h-3.5 text-orange-400"></i> Frame 390x844px</span>
+                        <span class="px-3 py-1.5 rounded-lg bg-gray-950 border border-gray-800 flex items-center gap-1.5"><i data-lucide="layers" class="w-3.5 h-3.5 text-purple-400"></i> Auto Layout & Grid</span>
+                        <span class="px-3 py-1.5 rounded-lg bg-gray-950 border border-gray-800 flex items-center gap-1.5"><i data-lucide="component" class="w-3.5 h-3.5 text-cyan-400"></i> Reusable Components</span>
+                    </div>
+                </div>
+
+                <!-- Figma Canvas Preview Card -->
+                <div class="md:col-span-5 flex justify-center relative">
+                    <div class="w-full bg-gray-950 border border-gray-800 rounded-2xl p-4 font-mono text-xs text-gray-300 space-y-3 shadow-2xl relative overflow-hidden canvas-grid">
+                        <div class="flex items-center justify-between border-b border-gray-800 pb-2 text-gray-400">
+                            <span class="flex items-center gap-1.5 text-orange-400 font-bold"><i data-lucide="figma" class="w-4 h-4"></i> Mobile_App_v1.fig</span>
+                            <span class="text-xs bg-purple-950/80 text-purple-300 px-2 py-0.5 rounded border border-purple-800">100% Zoom</span>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="p-2 bg-gray-900/90 border border-gray-800 rounded-lg flex items-center justify-between text-[11px]">
+                                <span class="text-gray-300">📐 Frame Preset</span>
+                                <span class="text-orange-400 font-bold">iPhone 13 / 14 (390 × 844)</span>
+                            </div>
+                            <div class="p-2 bg-gray-900/90 border border-gray-800 rounded-lg flex items-center justify-between text-[11px]">
+                                <span class="text-gray-300">🎨 Primary Color</span>
+                                <span class="flex items-center gap-1 text-emerald-400"><span class="w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block"></span> #10B981</span>
+                            </div>
+                            <div class="p-2 bg-gray-900/90 border border-gray-800 rounded-lg flex items-center justify-between text-[11px]">
+                                <span class="text-gray-300">🔤 Typography</span>
+                                <span class="text-cyan-300">Inter / Plus Jakarta Sans</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- INTERACTIVE CANVAS / WIREFRAME VS HIGH-FIDELITY SIMULATOR -->
+        <section class="space-y-6" data-aos="fade-up">
+            <div class="flex items-center justify-between border-b border-gray-800 pb-4">
+                <div class="flex items-center gap-3">
+                    <div class="p-2 bg-orange-500/10 rounded-lg text-orange-400 border border-orange-500/20">
+                        <i data-lucide="smartphone" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-white">Simulator Mobile Layout (390 × 844 px)</h3>
+                        <p class="text-xs text-gray-400">Bandingkan tampilan struktur Low-Fidelity (Wireframe) dengan High-Fidelity UI secara interaktif.</p>
+                    </div>
+                </div>
+                <!-- Toggle Mode Switch -->
+                <div class="flex bg-gray-900 p-1 border border-gray-800 rounded-xl text-xs">
+                    <button id="btnLoFi" onclick="setMode('lofi')" class="px-3 py-1.5 rounded-lg font-semibold transition-all bg-orange-600 text-white">
+                        Low-Fi (Wireframe)
+                    </button>
+                    <button id="btnHiFi" onclick="setMode('hifi')" class="px-3 py-1.5 rounded-lg font-semibold transition-all text-gray-400 hover:text-white">
+                        High-Fi (Final UI)
+                    </button>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-12 gap-8 items-center">
+                <!-- Mobile Mockup Display (390x844 Frame Aspect Scale) -->
+                <div class="md:col-span-5 flex justify-center">
+                    <div class="w-[300px] h-[600px] bg-gray-950 border-4 border-gray-800 rounded-[40px] p-4 shadow-2xl relative flex flex-col justify-between overflow-hidden glow-purple transition-all duration-300">
+                        <!-- Phone Notch / Island -->
+                        <div class="w-28 h-4 bg-gray-800 rounded-full mx-auto mb-3 flex justify-center items-center">
+                            <div class="w-2.5 h-2.5 bg-gray-950 rounded-full"></div>
+                        </div>
+
+                        <!-- Dynamic Mockup Content Container -->
+                        <div id="mockupScreen" class="flex-1 space-y-3 text-xs overflow-y-auto pr-1">
+                            <!-- Lo-Fi State Default -->
+                            <div class="p-3 bg-gray-900 border border-dashed border-gray-700 rounded-xl space-y-2">
+                                <div class="w-12 h-3 bg-gray-700 rounded"></div>
+                                <div class="w-3/4 h-4 bg-gray-600 rounded font-bold"></div>
+                            </div>
+                            <div class="h-28 bg-gray-900 border border-dashed border-gray-700 rounded-xl flex items-center justify-center text-gray-500 text-[10px]">
+                                [ Image Placeholder ]
+                            </div>
+                            <div class="space-y-2">
+                                <div class="h-3 bg-gray-800 rounded w-full"></div>
+                                <div class="h-3 bg-gray-800 rounded w-4/5"></div>
+                            </div>
+                            <div class="p-3 bg-gray-800 border border-gray-700 rounded-xl h-10 flex items-center justify-center font-bold text-gray-400">
+                                [ Action Button ]
+                            </div>
+                        </div>
+
+                        <!-- Phone Bottom Home Bar -->
+                        <div class="w-24 h-1 bg-gray-700 rounded-full mx-auto mt-3"></div>
+                    </div>
+                </div>
+
+                <!-- Explanation Panel -->
+                <div class="md:col-span-7 bg-cardBg border border-gray-800 rounded-2xl p-6 space-y-4">
+                    <h4 id="modeTitle" class="text-lg font-bold text-orange-400 flex items-center gap-2">
+                        <i data-lucide="box" class="w-5 h-5"></i> Low-Fidelity (Wireframe) Phase
+                    </h4>
+                    <p id="modeDesc" class="text-sm text-gray-300 leading-relaxed">
+                        Fase konsentrasi pada **tata letak (layout)**, hirarki informasi, dan navigasi tanpa terdistraksi oleh warna, foto, atau gaya visual. Menggunakan elemen abu-abu dan teks tempat sementara (*placeholder*).
+                    </p>
+
+                    <div class="border-t border-gray-800 pt-4 space-y-3">
+                        <h5 class="text-xs font-bold uppercase tracking-wider text-gray-400">Aturan Utama pada Ukuran 390 × 844 px:</h5>
+                        <ul class="text-xs space-y-2 text-gray-300 font-sans">
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="check-circle" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i>
+                                <span><b>Safe Area Margin:</b> Berikan padding samping minimal <b>16px - 20px</b> agar konten tidak menempel ke pinggir layar.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="check-circle" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i>
+                                <span><b>Touch Target Size:</b> Tombol utama minimal setinggi <b>44px - 48px</b> agar mudah ditekan oleh jempol.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="check-circle" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i>
+                                <span><b>Grid System:</b> Gunakan 4-Column Layout Grid di Figma dengan margin 16px dan gutter 12px.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- STEP-BY-STEP PRAKTIKUM FIGMA -->
+        <section class="space-y-6" data-aos="fade-up">
+            <div class="flex items-center gap-3 border-b border-gray-800 pb-4">
+                <div class="p-2 bg-purple-500/10 rounded-lg text-purple-400 border border-purple-500/20">
+                    <i data-lucide="list-checks" class="w-5 h-5"></i>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white">Langkah Praktikum Design Mobile App</h3>
+                    <p class="text-xs text-gray-400">Tahapan merancang aplikasi seluler di Figma dari nol hingga siap di-prototype.</p>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Step 1 -->
+                <div class="bg-cardBg border border-gray-800 rounded-2xl p-5 space-y-3 hover:border-orange-500/40 transition-all">
+                    <div class="w-8 h-8 rounded-xl bg-orange-500/20 border border-orange-500/40 text-orange-400 flex items-center justify-center font-bold text-sm">
+                        01
+                    </div>
+                    <h4 class="text-base font-bold text-white">Menyiapkan Canvas & Grid</h4>
+                    <p class="text-xs text-gray-400 leading-relaxed">
+                        Tekan shortcut <code class="text-orange-300 bg-gray-900 px-1 py-0.5 rounded">F</code>, pilih preset <b>iPhone 13 / 14 (390×844)</b>. Tambahkan Layout Grid 4 Kolom dengan margin 16px.
+                    </p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="bg-cardBg border border-gray-800 rounded-2xl p-5 space-y-3 hover:border-purple-500/40 transition-all">
+                    <div class="w-8 h-8 rounded-xl bg-purple-500/20 border border-purple-500/40 text-purple-400 flex items-center justify-center font-bold text-sm">
+                        02
+                    </div>
+                    <h4 class="text-base font-bold text-white">Penerapan Auto Layout</h4>
+                    <p class="text-xs text-gray-400 leading-relaxed">
+                        Seleksi elemen lalu tekan <code class="text-purple-300 bg-gray-900 px-1 py-0.5 rounded">Shift + A</code> untuk mengaktifkan Auto Layout agar komponen bersifat responsif secara otomatis.
+                    </p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="bg-cardBg border border-gray-800 rounded-2xl p-5 space-y-3 hover:border-cyan-500/40 transition-all">
+                    <div class="w-8 h-8 rounded-xl bg-cyan-500/20 border border-cyan-500/40 text-cyan-400 flex items-center justify-center font-bold text-sm">
+                        03
+                    </div>
+                    <h4 class="text-base font-bold text-white">Design System & Component</h4>
+                    <p class="text-xs text-gray-400 leading-relaxed">
+                        Buat Reusable Component untuk Tombol, Card, dan Navigation Bar menggunakan <code class="text-cyan-300 bg-gray-900 px-1 py-0.5 rounded">Ctrl + Alt + K</code>.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CHECKLIST TUGAS PRAKTIKUM -->
+        <section class="bg-cardBg border border-gray-800 rounded-2xl p-6 space-y-4" data-aos="fade-up">
+            <div class="flex items-center justify-between border-b border-gray-800 pb-3">
+                <div class="flex items-center gap-3">
+                    <div class="p-2 bg-emerald-500/10 rounded-lg text-emerald-400 border border-emerald-500/20">
+                        <i data-lucide="check-square" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-base font-bold text-white">Checklist Kelengkapan Proyek UI Mobile</h3>
+                        <p class="text-xs text-gray-400">Pastikan seluruh kriteria syarat tugas UI/UX berikut terpenuhi di file Figma kamu.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid sm:grid-cols-2 gap-3 text-xs">
+                <label class="flex items-center gap-3 p-3 bg-gray-950 border border-gray-800 rounded-xl cursor-pointer hover:border-gray-700 transition-all">
+                    <input type="checkbox" class="w-4 h-4 accent-orange-500 rounded">
+                    <span class="text-gray-300">Ukuran Frame tepat 390 × 844 px (iPhone 13/14)</span>
+                </label>
+                <label class="flex items-center gap-3 p-3 bg-gray-950 border border-gray-800 rounded-xl cursor-pointer hover:border-gray-700 transition-all">
+                    <input type="checkbox" class="w-4 h-4 accent-orange-500 rounded">
+                    <span class="text-gray-300">Memiliki alur minimal 3 Skrin (Splash/Home/Detail)</span>
+                </label>
+                <label class="flex items-center gap-3 p-3 bg-gray-950 border border-gray-800 rounded-xl cursor-pointer hover:border-gray-700 transition-all">
+                    <input type="checkbox" class="w-4 h-4 accent-orange-500 rounded">
+                    <span class="text-gray-300">Penerapan Auto Layout pada Card dan Button</span>
+                </label>
+                <label class="flex items-center gap-3 p-3 bg-gray-950 border border-gray-800 rounded-xl cursor-pointer hover:border-gray-700 transition-all">
+                    <input type="checkbox" class="w-4 h-4 accent-orange-500 rounded">
+                    <span class="text-gray-300">Kontras warna memenuhi standar aksesibilitas WCAG</span>
+                </label>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-800/80 bg-cardBg/60 py-8 text-center text-xs text-gray-500">
+        <div class="max-w-6xl mx-auto px-4 space-y-2">
+            <p>© 2026 Curriculum CS • MA Plus Sunan Giri</p>
+            <p class="text-gray-600">Modul Pertemuan 01 - 03: UI/UX Design di Figma (Web & Mobile Frame).</p>
+        </div>
+    </footer>
+
+    <!-- Interactive Script -->
+    <script>
+        AOS.init({ duration: 700, once: true });
+        lucide.createIcons();
+
+        function setMode(mode) {
+            const screen = document.getElementById('mockupScreen');
+            const btnLoFi = document.getElementById('btnLoFi');
+            const btnHiFi = document.getElementById('btnHiFi');
+            const title = document.getElementById('modeTitle');
+            const desc = document.getElementById('modeDesc');
+
+            if (mode === 'lofi') {
+                btnLoFi.className = "px-3 py-1.5 rounded-lg font-semibold transition-all bg-orange-600 text-white";
+                btnHiFi.className = "px-3 py-1.5 rounded-lg font-semibold transition-all text-gray-400 hover:text-white";
+                
+                title.innerHTML = `<i data-lucide="box" class="w-5 h-5"></i> Low-Fidelity (Wireframe) Phase`;
+                title.className = "text-lg font-bold text-orange-400 flex items-center gap-2";
+                desc.innerText = "Fase konsentrasi pada tata letak (layout), hirarki informasi, dan navigasi tanpa terdistraksi oleh warna, foto, atau gaya visual. Menggunakan elemen abu-abu dan teks tempat sementara (placeholder).";
+
+                screen.innerHTML = `
+                    <div class="p-3 bg-gray-900 border border-dashed border-gray-700 rounded-xl space-y-2">
+                        <div class="w-12 h-3 bg-gray-700 rounded"></div>
+                        <div class="w-3/4 h-4 bg-gray-600 rounded font-bold"></div>
+                    </div>
+                    <div class="h-28 bg-gray-900 border border-dashed border-gray-700 rounded-xl flex items-center justify-center text-gray-500 text-[10px]">
+                        [ Image Placeholder ]
+                    </div>
+                    <div class="space-y-2">
+                        <div class="h-3 bg-gray-800 rounded w-full"></div>
+                        <div class="h-3 bg-gray-800 rounded w-4/5"></div>
+                    </div>
+                    <div class="p-3 bg-gray-800 border border-gray-700 rounded-xl h-10 flex items-center justify-center font-bold text-gray-400">
+                        [ Action Button ]
+                    </div>
+                `;
+            } else {
+                btnHiFi.className = "px-3 py-1.5 rounded-lg font-semibold transition-all bg-orange-600 text-white";
+                btnLoFi.className = "px-3 py-1.5 rounded-lg font-semibold transition-all text-gray-400 hover:text-white";
+
+                title.innerHTML = `<i data-lucide="sparkles" class="w-5 h-5"></i> High-Fidelity (Final UI) Phase`;
+                title.className = "text-lg font-bold text-emerald-400 flex items-center gap-2";
+                desc.innerText = "Fase penyempurnaan desain dengan menerapkan warna tema, tipografi siap pakai, gambar asli, bayangan (shadow), serta gaya visual utuh yang siap diserahkan ke pengembang aplikasi.";
+
+                screen.innerHTML = `
+                    <div class="p-3 bg-emerald-950/60 border border-emerald-800/80 rounded-xl space-y-1">
+                        <span class="text-[10px] text-emerald-400 font-bold uppercase tracking-wide">Selamat Datang</span>
+                        <h5 class="text-sm font-bold text-white">Aplikasi Qur'an Digital</h5>
+                    </div>
+                    <div class="h-28 bg-gradient-to-r from-emerald-600 to-teal-700 rounded-xl p-3 flex flex-col justify-between text-white shadow-lg">
+                        <span class="text-[10px] bg-white/20 px-2 py-0.5 rounded w-max">Surah Hari Ini</span>
+                        <div>
+                            <div class="font-bold text-sm">Al-Kahfi</div>
+                            <div class="text-[10px] text-emerald-100">110 Ayat • Makkiyah</div>
+                        </div>
+                    </div>
+                    <div class="space-y-1.5">
+                        <div class="text-[11px] font-bold text-gray-300">Fitur Utama</div>
+                        <div class="grid grid-cols-2 gap-2">
+                            <div class="p-2 bg-gray-900 border border-gray-800 rounded-lg text-center text-[10px] text-emerald-400 font-semibold">📖 Baca Juz</div>
+                            <div class="p-2 bg-gray-900 border border-gray-800 rounded-lg text-center text-[10px] text-cyan-400 font-semibold">🎧 Murottal</div>
+                        </div>
+                    </div>
+                    <button class="w-full py-2.5 bg-emerald-500 hover:bg-emerald-400 text-gray-950 font-bold rounded-xl text-xs shadow-md transition-all">
+                        Mulai Membaca
+                    </button>
+                `;
+            }
+            lucide.createIcons();
+        }
+    </script>
+</body>
+</html>
